@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="{% static 'assets/logo/logo.png' %}" alt="">
+                <span>Canv.AS</span>
+            </div>
+
+            <div class="menu">
+                <a href="">Home</a>
+                <a href="">Shop</a>
+                <a href="">Artist</a>
+                <a href="">FAQS</a>
+                <a href="">Contact Us</a>
+            </div>
+
+            <div class="options">
+                <div class="search"><a href=""><span class="material-symbols-outlined">search</span></a></div>
+                <div class="account"><a href=""><span class="material-symbols-outlined">person</span>Sign In</a></div>
+                <div class="cart"><a href=""><span class="material-symbols-outlined">shopping_cart</span>Cart</a></div>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <div class="hero1">
+                <h1>Latest Painting <br>Collection</h1>
+                <p>Discover the world by the sale of the original paintings</p>
+                <a href="">Purchase Now <span class="material-symbols-outlined">local_mall</span></a>
+            </div>
+            <div class="hero2">
+                <img src="{% static 'assets/logo/hero2.png' %}" alt="">
+            </div>
+        </section>
+    </header>
+
+    {% block content %}
+    <h1>hello</h1>
+    {% endblock content %}
+
+    <footer>
+        <div class="foot1">
+    
+            <div class="foot_info1">
+                <h1>INFO</h1>
+                <p><span class="material-symbols-outlined">location_on</span> Maihar (485771) District Satna Madhya pradesh.</p>
+                <p><span class="material-symbols-outlined">perm_phone_msg</span>+91 9098691543 <br>+91 8989591496</p>
+                <p><i class="fa-brands fa-google-pay"></i><i class="fa-brands fa-paypal"></i><i class="fa-regular fa-credit-card"></i><i class="fa-brands fa-cc-visa"></i></p>
+            </div>
+    
+            <div class="foot_info2">
+                <h1>NAVIGATE</h1>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+    
+            <div class="foot_info3">
+                <h1>CATEGORY</h1>
+                <ul>
+                    <li><a href="#">Landscape</a></li>
+                    <li><a href="#">Abstract</a></li>
+                    <li><a href="#">Portraits</a></li>
+                    <li><a href="#">Modern Art</a></li>
+                </ul>
+            </div>
+    
+            <div class="foot_info4">
+                <h1>POPULAR BRANDS</h1>
+                <ul>
+                    <li><a href="#">Brand 1</a></li>
+                    <li><a href="#">Brand 2</a></li>
+                    <li><a href="#">Brand 3</a></li>
+                    <li><a href="#">Brand 4</a></li>
+                </ul>
+            </div>
+    
+        </div>
+    
+        <div class="foot2"><span><span class="material-symbols-outlined">sensor_occupied</span>Artist : Anurag singh </span></div>
+    
+        <div class="foot3"><span><i class="fa-brands fa-facebook"></i><i class="fa-brands fa-instagram"></i><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-github"></i><i class="fa-brands fa-whatsapp"></i></span></div>
+        <hr>
+        <div class="foot4">Powered By Anurag singh &copy; 2023 Canv.AS</div>
+    </footer>
+    
+</body>
+<script src="https://kit.fontawesome.com/5d90022efb.js" crossorigin="anonymous"></script>
+</html>
