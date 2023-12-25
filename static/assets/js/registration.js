@@ -1,12 +1,13 @@
-let signup=document.querySelector('#signup');
-let login=document.querySelector('#login');
+function showContent(contentId) {
+    document.querySelectorAll('.login-signup-form-content').forEach(function (content) {
+        content.classList.remove('active-login-signup-content');
+    });
 
-function toggleTab(tab) {
-    if (tab === 'login') {
-        login.style.display = 'block';
-        signup.style.display = 'none';
-    } else if (tab === 'signup') {
-        login.style.display = 'none';
-        signup.style.display = 'block';
-    }
+    document.getElementById(contentId).classList.add('active-login-signup-content');
+
+    document.querySelectorAll('.login-signup-tab').forEach(function (tab) {
+        tab.classList.remove('active-login-signup-tab');
+    });
+
+    document.querySelector('.login-signup-tab[data-content="' + contentId + '"]').classList.add('active-login-signup-tab');
 }
