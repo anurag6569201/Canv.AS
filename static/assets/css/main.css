@@ -26,6 +26,7 @@ body::-webkit-scrollbar{
 .logo span{
     font-size: 3em;
     font-family: 'Atomic Age', sans-serif;
+    text-shadow: 2px 4px 4px grey;
 }
 .menu a{
     text-decoration: none;
@@ -39,16 +40,8 @@ body::-webkit-scrollbar{
 /* nav end */
 
 /* hero */
-.hero{
-    top: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 2em;
-}
-.hero1,.hero2{
-    width: 50%;
+.hero1{
+    padding-left: 40px;
 }
 .hero1 h1{
     font-size: 6em;
@@ -78,9 +71,27 @@ body::-webkit-scrollbar{
     border-radius: .5em;
     margin-top: .5em;
 }
-.hero2 img{
+.hero2{
     height: 100vh;
-    width: 50vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero2 img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: cover;
+}
+.hero_taker{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-primary{
+    background: linear-gradient(#d65189,#dd2e8e79);
 }
 /* hero end */
 
