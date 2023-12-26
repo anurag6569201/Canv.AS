@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block content %}
-
-<div id="login-signup-form-container">
-    <div class="containig_image">
-        <img src="/static/assets/logo/register.png" alt="">
-    </div>
-    <div class="contaning_forms">
-        <div class="login-signup-tab-container">
-            <div class="login-signup-tab active-login-signup-tab" onclick="showContent('login')">Login</div>
-            <div class="login-signup-tab" onclick="showContent('signup')">Signup</div>
+<div class="container">
+    <div id="login-signup-form-container">
+        <div class="containig_image">
+            <img src="/static/assets/logo/register.png" alt="">
         </div>
+        <div class="contaning_forms">
+            <div class="login-signup-tab-container">
+                <div class="login-signup-tab active-login-signup-tab" onclick="showContent('login')">Login</div>
+                <div class="login-signup-tab" onclick="showContent('signup')">Signup</div>
+            </div>
 
-        <div class="login-signup-form-content active-login-signup-content" id="login">
-            <form action="" method="POST">
-                <input type="hidden" name="csrfmiddlewaretoken"
+            <div class="login-signup-form-content active-login-signup-content" id="login">
+                <form action="" method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken"
                     value="3mAzUROQRsVUpnvq7qhYLwy0GtkcUUO5ZZyx02QStiogLbZdAYZ5sm7RcRQOZdCB">
                 <label class="login-signup-label" for="login_username">Username:</label>
                 <input class="login-signup-input" type="text" name="login_username" maxlength="100" required=""
@@ -26,12 +26,12 @@
                     required="" id="login_password">
 
                 <button class="login-signup-button" type="submit">Login</button>
-            </form>
-        </div>
+                </form>
+            </div>
 
-        <div class="login-signup-form-content" id="signup">
-            <form action="" method="POST">
-                {% csrf_token %}
+            <div class="login-signup-form-content" id="signup">
+                <form action="" method="POST">
+                    {% csrf_token %}
                 <p>
                     <label class="login-signup-label" for="id_username">Username:</label>
                     <input class="login-signup-input" type="text" name="username" maxlength="100" required id="id_username">
@@ -53,10 +53,10 @@
                 </p>
 
                 <button class="login-signup-button" type="submit">Register</button>
-            </form>
+                </form>
+            </div>
         </div>
-
     </div>
-    
 </div>
+
 {% endblock content %}

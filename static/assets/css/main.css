@@ -5,57 +5,69 @@
     padding: 0;
     box-sizing: border-box;
 }
-html,body{
+
+html,
+body {
     overflow-x: hidden;
     font-size: 10px;
 }
-body::-webkit-scrollbar{
+
+body::-webkit-scrollbar {
     width: 0px;
 }
+
 /* nav start */
 
-.logo{
+.logo {
     width: 25vw;
     display: flex;
     align-items: center;
     justify-content: left;
 }
-.logo img{
+
+.logo img {
     width: 60px;
 }
-.logo span{
+
+.logo span {
     font-size: 3em;
     font-family: 'Atomic Age', sans-serif;
     text-shadow: 2px 4px 4px grey;
 }
-.menu a{
+
+.menu a {
     text-decoration: none;
     font-weight: 200;
     color: black;
 }
-.menu a:hover{
+
+.menu a:hover {
     text-shadow: 2px 4px 4px grey;
 }
 
 /* nav end */
 
 /* hero */
-.hero1{
+.hero1 {
     padding-left: 40px;
+    padding-bottom: 40px;
 }
-.hero1 h1{
+
+.hero1 h1 {
     font-size: 6em;
     font-family: 'Atomic Age', sans-serif;
     font-weight: 700;
     line-height: 1em;
 }
-.hero1 p{
+
+.hero1 p {
     font-size: 2em;
     font-family: 'Atomic Age', sans-serif;
     font-weight: 300;
     color: grey;
 }
-.hero1 a{
+
+.hero1 a {
     font-size: 2.5em;
     font-family: 'Atomic Age', sans-serif;
     font-weight: 300;
@@ -71,13 +83,15 @@ body::-webkit-scrollbar{
     border-radius: .5em;
     margin-top: .5em;
 }
-.hero2{
+
+.hero2 {
     height: 100vh;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .hero2 img {
     width: 100%;
     height: auto;
@@ -85,45 +99,56 @@ body::-webkit-scrollbar{
     display: block;
     object-fit: cover;
 }
-.hero_taker{
+
+.hero_taker {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.btn-primary{
-    background: linear-gradient(#d65189,#dd2e8e79);
+
+.btn-primary {
+    background: linear-gradient(#d65189, #dd2e8e79);
 }
+
 /* hero end */
 
 /* footer */
-footer{
+footer {
     padding: 0 5em;
     padding-top: 5em;
     background-color: black;
     color: white;
 }
-footer ul{
+
+footer ul {
     list-style-type: none;
 }
-footer ul li{
+
+footer ul li {
     padding-top: 1em;
 }
-footer ul a{
+
+footer ul a {
     text-decoration: none;
     font-size: 1.5em;
     color: rgb(156, 154, 154);
 }
-.foot1{
+
+.ft2,
+.ft1,
+.foot1 {
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
 }
-.foot_info1{
-    width: 25%;
+
+.foot_info1 {
+    width: 25vw;
     padding: 0 2em;
     text-decoration: none;
 }
-.foot_info1 p{
+
+.foot_info1 p {
     font-size: 1.5em;
     padding-top: 1em;
     display: flex;
@@ -131,44 +156,38 @@ footer ul a{
     justify-content: left;
     gap: 1em;
 }
-.foot_info1 p i{
-    font-size: 2em!important;
+
+.foot_info1 p i {
+    font-size: 2em !important;
 }
-.foot_info2{
-    width: 25%;
+
+.foot_info2 {
+    width: 25vw;
     padding: 0 2em;
     text-decoration: none;
 }
 
-.foot_info3{
-    width: 25%;
+.foot_info3 {
+    width: 25vw;
     padding: 0 2em;
     text-decoration: none;
 }
-.foot_info4{
-    width: 25%;
+
+.foot_info4 {
+    width: 25vw;
     padding: 0 2em;
     text-decoration: none;
 }
-.foot2{
-    width: 100%;
-    padding: 2em;
-}
-.foot2 span{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2em;
-    gap: 1em;
-}
-.foot3{
+
+.foot3 {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 2em;
+    padding-bottom: 1.4em;
 }
-.foot3 span{
+
+.foot3 span {
     width: fit-content;
     display: flex;
     align-items: center;
@@ -180,10 +199,28 @@ footer ul a{
     background-color: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(5px);
 }
-.foot4{
-    font-size: 2em;
+
+.foot4 {
+    font-size: 1.4em;
     padding: 1em 2em 1em 2em;
     width: 100%;
     text-align: center;
 }
+
+@media (max-width:600px) {
+
+    .foot1 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .foot_info1{
+        width: 100%;
+    }
+    footer{
+        padding: 0;
+        padding-top: 20px;
+    }
+}
+
 /* footer end */
