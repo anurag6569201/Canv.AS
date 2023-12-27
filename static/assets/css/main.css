@@ -52,7 +52,7 @@ body::-webkit-scrollbar {
     padding-left: 40px;
     padding-bottom: 40px;
 }
-
+.hero1 h2,
 .hero1 h1 {
     font-size: 6em;
     font-family: 'Atomic Age', sans-serif;
