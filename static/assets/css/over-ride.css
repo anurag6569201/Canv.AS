@@ -2,14 +2,16 @@
 .offcanvas-header {
     padding: 10px 20px;
 }
-
+.head_nav{
+    display: none;
+    width: 100%;
+}
 .nav-container {
     padding-right: 40px;
 }
 
 .navbar {
     background: rgba(255, 255, 255, .0);
-
 }
 
 .menu {

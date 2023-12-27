@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="head_nav d-none">
         <nav class="navbar fixed-top" id="navb">
             <div class="container-fluid nav-container">
                 <div class="logo">
@@ -45,22 +45,28 @@
                         <div class="menu">
                             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/user/sign-up"><span class="material-symbols-outlined">person</span>Sign-Up</a>
+                                    <a class="nav-link active" aria-current="page" href="/user/sign-up"><span
+                                            class="material-symbols-outlined">person</span>Sign-Up</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="/"><span class="material-symbols-outlined">home</span>Home</a>
+                                    <a class="nav-link active" aria-current="page" href="/"><span
+                                            class="material-symbols-outlined">home</span>Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span class="material-symbols-outlined">local_shipping</span>Shop</a>
+                                    <a class="nav-link" href="#"><span
+                                            class="material-symbols-outlined">local_shipping</span>Shop</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span class="material-symbols-outlined">favorite</span>Artist</a>
+                                    <a class="nav-link" href="#"><span
+                                            class="material-symbols-outlined">favorite</span>Artist</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span class="material-symbols-outlined">person_raised_hand</span>FAQS</a>
+                                    <a class="nav-link" href="#"><span
+                                            class="material-symbols-outlined">person_raised_hand</span>FAQS</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span class="material-symbols-outlined">person_edit</span>Account</a>
+                                    <a class="nav-link" href="#"><span
+                                            class="material-symbols-outlined">person_edit</span>Account</a>
                                 </li>
                             </ul>
                         </div>
@@ -69,7 +75,22 @@
             </div>
         </nav>
     </header>
-
+    <script>
+        let navbar = document.querySelector(".navbar");
+        let head_nav = document.querySelector(".head_nav");
+        window.addEventListener("scroll", () => {
+            const offset = window.pageYOffset;
+            console.log(offset);
+            if (offset >= 10) {
+                navbar.style.background = "rgba(255, 255, 255, 1)";
+                head_nav.classList.remove("d-none");
+            }
+            else {
+                head_nav.classList.remove("d-none");
+                navbar.style.background = "rgba(255, 255, 255, 0)";
+            }
+        });
+    </script>
     {% block content %}
 
 
@@ -83,7 +104,8 @@
                     <h1>INFO</h1>
                     <p><span class="material-symbols-outlined">location_on</span> Maihar (485771) District Satna Madhya
                         pradesh.</p>
-                    <p><span class="material-symbols-outlined">perm_phone_msg</span>+91 9098691543 <br>+91 8989591496</p>
+                    <p><span class="material-symbols-outlined">perm_phone_msg</span>+91 9098691543 <br>+91 8989591496
+                    </p>
                     <p><i class="fa-brands fa-google-pay"></i><i class="fa-brands fa-paypal"></i><i
                             class="fa-regular fa-credit-card"></i><i class="fa-brands fa-cc-visa"></i></p>
                 </div>
@@ -109,7 +131,7 @@
                         <li><a href="#">Modern Art</a></li>
                     </ul>
                 </div>
-    
+
                 <div class="foot_info4">
                     <h1>POPULAR BRANDS</h1>
                     <ul>
@@ -136,6 +158,5 @@
     crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/5d90022efb.js" crossorigin="anonymous"></script>
 <script src="{% static 'assets/js/registration.js' %}"></script>
-<script src="{% static 'assets/js/main.js' %}"></script>
 
 </html>
