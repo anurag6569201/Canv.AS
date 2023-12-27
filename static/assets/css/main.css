@@ -49,10 +49,8 @@ body::-webkit-scrollbar {
 
 /* hero */
 .hero1 {
-    padding-left: 40px;
-    padding-bottom: 40px;
+    padding: 0 20px;
 }
-.hero1 h2,
 .hero1 h1 {
     font-size: 6em;
     font-family: 'Atomic Age', sans-serif;
@@ -91,13 +89,13 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
 }
-
+.hare_krishna img,
 .hero2 img {
     width: 100%;
     height: auto;
     max-width: 100%;
     display: block;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .hero_taker {
