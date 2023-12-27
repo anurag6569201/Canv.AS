@@ -51,13 +51,18 @@ body::-webkit-scrollbar {
 .hero1 {
     padding: 0 20px;
 }
+.fac_text,
+.heroh1,
 .hero1 h1 {
     font-size: 6em;
     font-family: 'Atomic Age', sans-serif;
     font-weight: 700;
     line-height: 1em;
+    padding-bottom: 1em;
 }
-
+.heroh1{
+    text-align: center;
+}
 .hero1 p {
     font-size: 2em;
     font-family: 'Atomic Age', sans-serif;
@@ -80,6 +85,7 @@ body::-webkit-scrollbar {
     padding: .3em;
     border-radius: .5em;
     margin-top: .5em;
+    border: none;
 }
 
 .hero2 {
@@ -89,13 +95,12 @@ body::-webkit-scrollbar {
     align-items: center;
     justify-content: center;
 }
-.hare_krishna img,
-.hero2 img {
+.hare_krishna img{
     width: 100%;
     height: auto;
     max-width: 100%;
     display: block;
-    object-fit: contain;
+    object-fit: fill;
 }
 
 .hero_taker {
@@ -205,6 +210,23 @@ footer ul a {
     text-align: center;
 }
 
+/* footer end */
+
+.fac_img{
+    width: max-content;
+}
+.card-deck{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.card-body p{
+    font-size: 18px;
+    text-align: center;
+}
+
+
+
 @media (max-width:600px) {
 
     .foot1 {
@@ -219,6 +241,10 @@ footer ul a {
         padding: 0;
         padding-top: 20px;
     }
+    .hero1 img{
+        display: none;
+    }
+    .card-deck{
+        flex-direction: column;
+    }
 }
-
-/* footer end */
