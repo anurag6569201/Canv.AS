@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ric*at^1mq!s)t)#(*fv8c7fa0e68mz^x*8*t**m!)yp1iutjx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = '[*]'
 
 
 # Application definition
@@ -79,12 +79,12 @@ WSGI_APPLICATION = 'ecomprj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
