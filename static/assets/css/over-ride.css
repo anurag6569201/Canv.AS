@@ -5,14 +5,9 @@
 .head_nav{
     width: 100%;
 }
-.nav-container {
-    padding-right: 40px;
-}
-
 .navbar {
     background: rgba(255, 255, 255, .0);
 }
-
 .menu {
     width: 100%;
     display: flex;
@@ -60,4 +55,13 @@
 .btn-close {
     font-size: 20px;
     border: 2px solid grey;
+}
+.cats2 .card,
+.cats1 .card{
+    border: none;
+}
+
+.cats .card-body{
+    padding-left: 0;
+    padding-right: 0;
 }
