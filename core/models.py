@@ -27,7 +27,7 @@ RATING=(
 
 def user_directory_path(instance,filename):
     return 'user_{0}/{1}'.format(instance.user.id,filename)
-class category(models.Model):
+class Category(models.Model):
     cid=ShortUUIDField(unique=True,length=-10,max_length=20,prefix="cat",alphabet="abcdefgh12345")
     title=models.CharField(max_length=100)
     image=models.ImageField(upload_to='category',default="category.jpg")
@@ -43,7 +43,7 @@ class category(models.Model):
     
 class Tags(models.Model):
     pass
-class vendor(models.Model):
+class Vendor(models.Model):
     vid = ShortUUIDField(unique=True, length=-10, max_length=20, prefix="ven", alphabet="abcdefgh12345")
 
     title = models.CharField(max_length=100, default="Nestify")
@@ -73,7 +73,7 @@ class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=-10, max_length=20, alphabet="abcdefgh12345")
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    category = models.ForeignKey(category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
 
     title = models.CharField(max_length=100, default="Fresh pear")
     image = models.ImageField(upload_to='user_directory_path', default="product.jpg")
@@ -134,6 +134,7 @@ class CartOrder(models.Model):
 
 class CartOrderItems(models.Model):
     order=models.ForeignKey(CartOrder,on_delete=models.CASCADE)
+    invoice_no=models.CharField(max_length=200)
     product_status=models.CharField(max_length=200)
     item=models.CharField(max_length=200)
     image=models.CharField(max_length=200)
@@ -154,7 +155,7 @@ class CartOrderItems(models.Model):
 ##########################################################product review and wishlist #############################################
 ##########################################################product review and wishlist #############################################
 
-class productReview(models.Model):
+class ProductReview(models.Model):
     user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     product=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     review=models.TextField()
@@ -171,7 +172,7 @@ class productReview(models.Model):
         return self.rating
     
 
-class wishlist(models.Model):
+class Wishlist(models.Model):
     user=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
     product=models.ForeignKey(Product,on_delete=models.SET_NULL,null=True)
     date=models.DateTimeField(auto_now_add=True)
