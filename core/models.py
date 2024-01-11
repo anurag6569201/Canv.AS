@@ -133,6 +133,7 @@ class CartOrder(models.Model):
         verbose_name_plural = "Cart Order"
 
 class CartOrderItems(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     order=models.ForeignKey(CartOrder,on_delete=models.CASCADE)
     invoice_no=models.CharField(max_length=200)
     product_status=models.CharField(max_length=200)

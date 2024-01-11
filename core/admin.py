@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Category,Tags,Vendor,Product,ProductImages,CartOrder,CartOrderItems,ProductReview,Wishlist,Address
+from core.models import Category,Vendor,Product,ProductImages,CartOrder,CartOrderItems,ProductReview,Wishlist,Address
 
 
 # Register your models here.
@@ -11,14 +11,14 @@ class ProductAdmin(admin.ModelAdmin):
     list_display=['user','title','product_image','price','featured','product_status']
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display=['user','category_image']
+    list_display=['category_image']
 
 
 class VendorAdmin(admin.ModelAdmin):
     list_display=['title','vendor_image']
 
 class CartOrderAdmin(admin.ModelAdmin):
-    list_display=['user','price','paid_status','order_date','product_status']
+    list_display=['user','price','paid_track','order_date','product_status']
 
 
 class CartOrderItemAdmin(admin.ModelAdmin):
@@ -34,3 +34,12 @@ class WishlistAdmin(admin.ModelAdmin):
 
 class AddressAdmin(admin.ModelAdmin):
     list_display=['user','address','status']
+
+admin.site.register(Product,ProductAdmin)
+admin.site.register(Category,CategoryAdmin)
+admin.site.register(Vendor,VendorAdmin)
+admin.site.register(CartOrder,CartOrderAdmin)
+admin.site.register(CartOrderItems,CartOrderItemAdmin)
+admin.site.register(ProductReview,ProductReviewAdmin)
+admin.site.register(Wishlist,WishlistAdmin)
+admin.site.register(Address,AddressAdmin)
