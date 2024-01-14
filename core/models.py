@@ -78,7 +78,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=100)
     old_price = models.DecimalField(max_digits=10, decimal_places=2, default=200)
     specification = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
+    # tags = models.ForeignKey(Tags, on_delete=models.SET_NULL, null=True)
     product_status = models.CharField(choices=STATUS, max_length=10, default="in_review")
     status = models.BooleanField(default=True)
     in_stock = models.BooleanField(default=True)

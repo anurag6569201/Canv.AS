@@ -1,0 +1,16 @@
+/* left container */
+.main-container{
+    width: 100%;
+}
+.left-container{
+    height: 100vh;
+    position: fixed;
+    top: 110px;
+    left: 0;
+    width: 30em;
+    background-color: grey;
+}
+.right-container{
+    background-color: red;
+    margin-left: 30em;
+}
