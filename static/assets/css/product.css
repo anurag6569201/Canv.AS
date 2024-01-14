@@ -14,3 +14,101 @@
     background-color: red;
     margin-left: 30em;
 }
+.right-container .carousel-inner{
+    object-fit: cover;
+}
+#carouselExampleCaptions,
+.carousel-inner,
+.carousel-inner,
+.carousel-item {
+  height: 50em;
+  overflow: hidden;
+}
+
+#carouselExampleCaptions img {
+  object-fit: contain;
+  height: 100%;
+  width: 100%;
+}
+
+.carousel-item {
+  position: static;
+}
+
+#carouselExampleCaptions {
+  border-radius: 1em;
+  margin-top: 5em;
+}
+
+.crousal {
+  padding: 2em;
+  margin-top: 5em;
+}
+/* product designing */
+.Category-product{
+    position: relative;
+    padding: 1.5em;
+    background-color: #f4f6f9;
+    border-radius: 1.5em;
+}
+.discount-badge{
+    position: absolute;
+    font-size: 1.8em;
+    border-radius: 1em 3em 1em 3em;
+    top: 0;
+    right: 0;
+}
+.product-image{
+    height: 20em;
+    object-fit: cover;
+    border-radius: 1.5em;
+}
+.first-line-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.card-text-category{
+    font-size: 1.8em;
+    padding: 0 1em;
+}
+.Category-product .card-title{
+    color: #000000;
+    font-size: 2em;
+    font-weight: 600;
+}
+span.card-text-rating{
+    font-size: 2em;
+    text-align: left;
+}
+span.card-text-vendor{
+    color: #dc6298;
+    font-size: 2em;
+    font-weight: 700;
+    text-align: left;
+}
+.last-line-text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.price-tags{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+span.card-text-price{
+    color: #dc6298;
+    font-weight: 700;
+    font-size: 1.8em;
+    font-style: italic;
+}
+span.card-text-old-price{
+    font-size: 1.8em;
+    color: grey;
+}
+.product-cart{
+    font-size: 1.8em;
+}

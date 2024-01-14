@@ -4,7 +4,7 @@ from core.models import Category, Vendor, Product, ProductImages, CartOrder, Car
 # Create your views here.
 
 def index(request):
-    products=Product.object.all()
+    products=Product.objects.filter(product_status="publish",featured=True).order_by('-id')
 
     context={
         "products":products

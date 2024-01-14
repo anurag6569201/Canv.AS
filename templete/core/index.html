@@ -3,4 +3,126 @@
 
 {% block content %}
 
+<div class="main-container">
+
+    <div class="left-container">
+
+        <div class="left-category">
+            <ol class="list-group list-group-numbered">
+                <span class="heading">Category</span>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Subheading</div>
+                        Content for list item
+                    </div>
+                    <span class="badge bg-primary rounded-pill">14</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="right-container">
+
+        <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="{% static 'assets/logo/logo.png' %}" class="d-block w-100 img-fluid" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'assets/logo/logo.png' %}" class="d-block w-100 img-fluid" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'assets/logo/logo.png' %}" class="d-block w-100 img-fluid" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                {% for p in products %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card Category-product">
+                        <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
+                        <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                        <div class="card-body">
+                           <div class="first-line-text">
+                            <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                            <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                           </div>
+
+                            <span class="card-text-rating">Rating: 4.5</span><br>
+                            <span class="card-text-vendor"><span style="color: black;">By</span> {{ p.vendor.title }}</span>
+
+                            <div class="last-line-text">
+                                <div class="price-tags">
+                                    <span class="card-text-price">{{ p.price }}</span>
+                                    <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
+                                </div>
+                            <button class="btn btn-success product-cart">Add to Cart</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+        
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock content %}
