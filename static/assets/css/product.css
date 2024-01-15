@@ -112,3 +112,18 @@ span.card-text-old-price{
 .product-cart{
     font-size: 1.8em;
 }
+
+
+/* category-product list */
+.product-category-heading{
+    font-size: 4em;
+}
+.breadcramb{
+    font-size: 1.8em;
+}
+.product-category-alert{
+    border: none;
+}
+.product-category-alert span{
+    font-size: 1.8em;
+}

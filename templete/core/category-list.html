@@ -1,0 +1,38 @@
+{% extends 'partials/basemain.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 110px;">
+    <div class="row">
+
+        {% for c in category %}
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="card Category-product">
+                <a href="{% url 'core:product_list_category' c.cid %}">
+                    <img src="{{ c.image.url }}" class="card-img-top product-image" alt="...">
+                </a>
+                
+                <div class="card-body">
+                   <div class="first-line-text">
+                    <a class="btn btn-primary card-text-category">{{ c.title }}</a>
+                   </div>
+
+                    <span class="card-text-vendor"><span style="color: black;"></span> {{ c.category.count }} {{ c.title }}</span>
+
+                    <div class="last-line-text">
+                        <div class="price-tags">
+                            <span class="card-text-price">{{ p.price }}</span>
+                            <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

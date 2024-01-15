@@ -1,0 +1,60 @@
+{% extends 'partials/basemain.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="card product-category-card" style="margin-top: 110px;">
+        <div class="card-body col-md-12">
+            <h5 class="card-title product-category-heading">{{ category.title }}</h5>
+            <div class="breadcramb">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                      <li class="breadcrumb-item active" aria-current="page">{{ category.title }}</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div> 
+    </div>
+
+    <div class="card product-category-alert">
+        <div class="card-body col-md-12">
+            <span class="text-primary">We Found {{ product.count }} {{ category.title }} for you!</span>
+        </div>
+    </div>
+
+    <div class="container" style="margin-top: 110px;">
+        <div class="row">
+    
+            {% for p in products %}
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="card Category-product">
+                    <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
+                    <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                    <div class="card-body">
+                       <div class="first-line-text">
+                        <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                        <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                       </div>
+    
+                        <span class="card-text-rating">Rating: 4.5</span><br>
+                        <span class="card-text-vendor"><span style="color: black;">By</span> {{ p.vendor.title }}</span>
+    
+                        <div class="last-line-text">
+                            <div class="price-tags">
+                                <span class="card-text-price">{{ p.price }}</span>
+                                <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
+                            </div>
+                        <button class="btn btn-success product-cart">Add to Cart</button>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+    
+        </div>
+    </div>
+    
+{% endblock content %}

@@ -71,7 +71,7 @@ class Vendor(models.Model):
 class Product(models.Model):
     pid = ShortUUIDField(unique=True, max_length=22, alphabet="abcdefgh12345")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True,related_name="category")
     vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100, default="Fresh pear")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
