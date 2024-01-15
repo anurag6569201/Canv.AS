@@ -4,8 +4,14 @@ from core import views
 app_name="core"
 
 urlpatterns=[
+    # homepage
     path('',views.index,name='index'),
     path('products',views.product_list,name='product_list'),
+
+    # category
     path('category',views.category_list,name='category_list'),
     path('category/<cid>',views.product_list_category,name='product_list_category'),
+
+    path('vendor',views.vendor_list,name='vendor_list'),
+    path('vendor/<vid>',views.vendor_detail,name='vendor_detail'),
 ] 

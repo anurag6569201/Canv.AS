@@ -14,6 +14,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/product.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/vendor.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/registrationn.css' %}">
 
 
@@ -86,9 +87,9 @@
                                         <span class="material-symbols-outlined">category</span>Category
                                     </a>
                                     <ul class="dropdown-menu" style="font-size: 1.8em; padding: 0; margin: 0;">
-                                        {% for c in category %}
+                                        {% for c in globalcategory %}
                                         <li>
-                                            <a style="justify-content: space-between;display: flex;" class="dropdown-item" href="#">
+                                            <a style="justify-content: space-between;display: flex;" class="dropdown-item" href="{% url 'core:product_list_category' c.cid %}">
                                                 <div><img class="rounded-circle" style="width: 20px; height: 20px; margin-right: 1em;" src="{{ c.image.url }}" alt="">
                                                     {{ c.title }}</div>
                                                 <div class="float-right">{{ c.category.count }}</div>
@@ -98,7 +99,7 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item" href="#">View All</a></li>
+                                        <li><a class="dropdown-item" href="{% url 'core:category_list' %}">View All</a></li>
                                     </ul>
                                     
                                 </li>

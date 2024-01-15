@@ -41,3 +41,20 @@ def product_list_category(request,cid):
     }
 
     return render(request,"core/category-product-list.html",context)
+
+def vendor_list(request):
+    vendors=Vendor.objects.all()
+    context={
+        "vendors":vendors,
+    }
+    return render(request,"core/vendor-list.html",context)
+
+
+def vendor_detail(request,vid):
+    vendor=Vendor.objects.get(vid=vid)
+    products=Product.objects.filter(product_status="publish",vendor=vendor)
+    context={
+        "vendor":vendor,
+        "products":products,
+    }
+    return render(request,"core/vendor-detail.html",context)

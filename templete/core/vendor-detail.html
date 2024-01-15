@@ -1,0 +1,108 @@
+{% extends 'partials/basemain.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container vendor-detail" style="margin-top: 110px;">
+    <div class="card product-category-card">
+        <div class="card-body col-md-12">
+            <h5 class="card-title product-category-heading">{{ vendor.title }}</h5>
+            <div class="breadcramb">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                      <li class="breadcrumb-item active" aria-current="page">Vendor</li>
+                      <li class="breadcrumb-item active" aria-current="page">Vendor-profile</li>
+                    </ol>
+                  </nav>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="card product-category-alert">
+        <div class="card-body col-md-12">
+            <span class="text-primary">We Found {{ products.count }} products for you!</span>
+        </div>
+    </div>
+    
+
+    <div class="text-center vendor-images">
+        <img src="{{ vendor.coverimage.url }}" alt="cover image" class="img-fluid vendor-cover-image">
+        <img src="{{ vendor.image.url }}" alt="Vendor Image" class="img-fluid vendor-user-image">
+    </div>
+
+    <h3 class="vendor-title">{{ vendor.title }}</h3>
+    <p class="vendor-description">{{ vendor.description }}</p>
+
+    <div class="container-fluid vendor-user-detail">
+        <div class="card-body">
+            <h5 class="card-title vendor-info-heading">Vendor Information</h5>
+    
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Address:</strong> <hr>{{ vendor.address }}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Contact:</strong> <hr>{{ vendor.contact }}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Chat Response Time:</strong> <hr>{{ vendor.chat_response_time }}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Shipping on Time:</strong> <hr>{{ vendor.shipping_on_time }}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Authentic Rating:</strong> <hr>★★★★☆
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Days for Return:</strong> <hr>{{ vendor.days_return }}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card mb-4" style="width: 100%;">
+                        <div class="card-body vendor-user-text">
+                            <strong>Warranty Period:</strong> <hr>{{ vendor.warranty_period }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    
+
+    <p class="text-muted mt-4 vendor-user">This vendor is associated with {{ vendor.user }}.</p>
+</div>
+
+{% endblock content %}

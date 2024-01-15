@@ -3,5 +3,5 @@ from core.models import Category, Vendor, Product, ProductImages, CartOrder, Car
 def default(request):
     categories=Category.objects.all()
     return {
-        'category':categories,
+        'globalcategory':categories,
     }
