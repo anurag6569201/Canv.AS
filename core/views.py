@@ -33,11 +33,11 @@ def category_list(request):
 
 def product_list_category(request,cid):
     category=Category.objects.get(cid=cid)
-    product=Product.objects.filter(product_status="publish",category=category)
+    products=Product.objects.filter(product_status="publish",category=category)
 
     context={
         "category":category,
-        "product":product,
+        "products":products,
     }
 
     return render(request,"core/category-product-list.html",context)

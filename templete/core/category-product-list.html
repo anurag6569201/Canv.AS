@@ -24,9 +24,9 @@
         </div>
     </div>
 
-    <div class="container" style="margin-top: 110px;">
+    <div class="container-fluid" style="margin-top: 1em;">
         <div class="row">
-    
+
             {% for p in products %}
             <div class="col-md-6 col-lg-3 mb-3">
                 <div class="card Category-product">
@@ -37,10 +37,10 @@
                         <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
                         <!-- <h5 class="card-title">{{ p.title }}</h5> -->
                        </div>
-    
+
                         <span class="card-text-rating">Rating: 4.5</span><br>
                         <span class="card-text-vendor"><span style="color: black;">By</span> {{ p.vendor.title }}</span>
-    
+
                         <div class="last-line-text">
                             <div class="price-tags">
                                 <span class="card-text-price">{{ p.price }}</span>
@@ -56,5 +56,4 @@
     
         </div>
     </div>
-    
 {% endblock content %}

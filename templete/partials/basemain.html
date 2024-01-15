@@ -79,6 +79,30 @@
                                     <a class="nav-link" href="#"><span
                                             class="material-symbols-outlined">favorite</span>Artist</a>
                                 </li>
+
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <span class="material-symbols-outlined">category</span>Category
+                                    </a>
+                                    <ul class="dropdown-menu" style="font-size: 1.8em; padding: 0; margin: 0;">
+                                        {% for c in category %}
+                                        <li>
+                                            <a style="justify-content: space-between;display: flex;" class="dropdown-item" href="#">
+                                                <div><img class="rounded-circle" style="width: 20px; height: 20px; margin-right: 1em;" src="{{ c.image.url }}" alt="">
+                                                    {{ c.title }}</div>
+                                                <div class="float-right">{{ c.category.count }}</div>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">View All</a></li>
+                                    </ul>
+                                    
+                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="#"><span
                                             class="material-symbols-outlined">person_raised_hand</span>FAQS</a>
@@ -150,7 +174,7 @@
             </div>
         </nav>
     </header>
-    
+
     <script>
         let navbar = document.querySelector(".navbar");
         let head_nav = document.querySelector(".head_nav");
@@ -223,6 +247,7 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/5d90022efb.js" crossorigin="anonymous"></script>
+<script src="{% static 'assets/js/registration.js' %}"></script>
 <script src="{% static 'assets/js/registration.js' %}"></script>
 
 </html>
