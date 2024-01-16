@@ -77,6 +77,7 @@ class Product(models.Model):
     title = models.CharField(max_length=100, default="Fresh pear")
     image = models.ImageField(upload_to=user_directory_path, default="product.jpg")
     description = models.TextField(null=True, blank=True, default="This is a product")
+    delivery_address = models.TextField(null=True, blank=True, default="Near khare mai mandir (485771)")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=100)
     old_price = models.DecimalField(max_digits=10, decimal_places=2, default=200)
     specification = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)

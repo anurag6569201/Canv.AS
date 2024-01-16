@@ -127,3 +127,107 @@ span.card-text-old-price{
 .product-category-alert span{
     font-size: 1.8em;
 }
+
+
+/* detail product */
+
+.saleoff-btn{
+    font-size: 1.4em;
+    background-color: #db7aa698;
+    padding: .3em 1em;
+    color: #bd3673;
+    border-radius: .5em;
+}
+.product-desc{
+    font-size: 4em;
+    margin-top: .5em;
+}
+.product-price{
+    display: flex;
+    align-items: center;
+    font-size: 5em;
+}
+.some-price{
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+}
+.old-price-tabs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.old-price-tabs span del{
+    display: flex;
+    align-items: center;
+}
+.percentage-price span,
+.percentage-price{
+    font-size: 1.2em;
+}
+.old-price{
+    font-size: 2.5em;
+}
+.product-descript{
+    font-size: 1.8em;
+}
+
+
+/*  */
+.product-btn-group{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 2em;
+    margin-top: 2em;
+}
+.quantity-btn{
+    font-size: 1.8em;
+    width: 3em;
+    border-radius: 4px;
+    border: 1px solid #bd3673;
+}
+.add-to-wishlist:focus-visible,
+.add-to-cart-button:focus-visible,
+.quantity-btn:focus-visible{
+    outline-offset: 0px;
+    outline:0px;
+}
+.add-to-wishlist,
+.add-to-cart-button{
+    font-size: 1.8em;
+    border: 1px solid #bd3673;
+    color: #bd3673;
+    padding: 0 1em;
+    border-radius: 4px;
+}
+.add-to-cart-button{
+    background-color: #db7aa698;
+}
+.delivery-address-change:hover,
+.add-to-wishlist:hover,
+.add-to-cart-button:hover{
+    background-color: #db7aa6c5;
+    color: #bd3673;
+}
+
+.dilevery-product .card-body p{
+    text-align: left!important;
+    display: flex;
+    align-items: center;
+}
+.delivery-address-change{
+    background-color: #db7aa698;
+    font-size: 1.8em;
+    border: 1px solid #bd3673;
+    padding: 0 1em;
+    color: #bd3673;
+    border-radius: 4px;
+}
+
+/* vendor */
+.vend-product-detail{
+    font-size: 1.8em;
+    margin: 1em 0em;
+}

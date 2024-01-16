@@ -10,7 +10,9 @@
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card Category-product">
                 <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
-                <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                <a href="{% url 'core:product_detail' p.pid %}">
+                    <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                </a>
                 <div class="card-body">
                    <div class="first-line-text">
                     <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>

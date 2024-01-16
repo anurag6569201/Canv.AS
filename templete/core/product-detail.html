@@ -1,0 +1,79 @@
+{% extends 'partials/basemain.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid" style="margin-top: 115px;">
+    <div class="row">
+
+        <div class="col-lg-4">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="..." style="width: 100%; height: 40em;">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                        card's content.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <span class="saleoff-btn">Sale Off</span>
+            <h1 class="product-desc">{{ product.title }}</h1>
+            <h2 class="rating">★★★★☆(30 review)</h2>
+            <div class="some-price">
+                <h1 class="product-price">
+                    <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span>{{ product.price }}
+                </h1>
+                <span class="old-price-tabs" style="margin-left: 1em;">
+                    <span class="percentage-price">-{{ product.get_percentage }}% Off</span>
+                    <span class="old-price"><del>{{ product.old_price }}</del></span>
+                </span>
+            </div>
+
+            <p class="product-descript">{{ product.description }}</p>
+
+          
+            <div class="product-btn-group">
+                <input type="number" value="1" min="1" class="quantity-btn">
+                <button id="button2" class="add-to-cart-button">Add to cart <i class="fas fa-shopping-cart"></i></button>
+                <button class="add-to-wishlist"><span style="font-size: 1em;" class="material-symbols-outlined">favorite</span></button>
+            </div>
+                    
+        </div>
+
+        <div class="col-lg-3">
+            <div class="dilevery-product">
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                      <h1 class="card-title">Delivery</h1>
+                      <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>
+                      <a href="#" class="btn delivery-address-change">Change</a>
+                        <br><br>
+                      <hr>
+                        <h1 class="card-title">Return & Warranty</h1>
+                        <p class="card-text"><span class="material-symbols-outlined">policy</span>100% Authenticate</p>
+                        <p class="card-text"><span class="material-symbols-outlined">cycle</span>10 Days Return</p>
+                        <p class="card-text"><span class="material-symbols-outlined">sync_lock</span>12 Months Warranty</p>
+                    </div>
+                </div>
+                <br><br>
+                <div class="card" style="width: 100%;">
+                    <div class="card-body">
+                      <h1 class="card-title">Vendor</h1>
+                        <div class="vend-product-detail">
+                            <span>{{ vendor.title }}</span>
+                            <span>★★★★☆(30 review)</span>
+                        </div>
+                      <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>
+                      <p class="card-text"><span class="material-symbols-outlined">person</span>9098691543</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock content %}
