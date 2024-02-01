@@ -8,10 +8,9 @@
     top: 110px;
     left: 0;
     width: 30em;
-    background-color: grey;
+    z-index: 100;
 }
 .right-container{
-    background-color: red;
     margin-left: 30em;
 }
 .right-container .carousel-inner{
@@ -21,16 +20,10 @@
 .carousel-inner,
 .carousel-inner,
 .carousel-item {
-  height: 50em;
   overflow: hidden;
+  border-radius: 1em;
+  background-color: #f4f6f9;
 }
-
-#carouselExampleCaptions img {
-  object-fit: contain;
-  height: 100%;
-  width: 100%;
-}
-
 .carousel-item {
   position: static;
 }
