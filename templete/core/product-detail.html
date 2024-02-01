@@ -8,10 +8,11 @@
 
         <div class="col-lg-4">
             <div class="card">
-                <img src="..." class="card-img-top" alt="..." style="width: 100%; height: 40em;">
-                <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                        card's content.</p>
+                <img style="object-fit: contain;height: 70vh;" src="{{ product.image.url }}" class="card-img-top" alt="..." style="width: 100%; height: 40em;">
+                <div class="other-images">
+                    {% for prd_img in product_images %}
+                    <img style="width: 10em;height: 10em;margin: auto;" src="{{ prd_img.images.url }}" alt="">
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -25,7 +26,7 @@
                     <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span>{{ product.price }}
                 </h1>
                 <span class="old-price-tabs" style="margin-left: 1em;">
-                    <span class="percentage-price">-{{ product.get_percentage }}% Off</span>
+                    <span class="percentage-price">-{{  product.get_percentage|floatformat:2 }}% Off</span>
                     <span class="old-price"><del>{{ product.old_price }}</del></span>
                 </span>
             </div>

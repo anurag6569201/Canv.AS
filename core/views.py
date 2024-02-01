@@ -62,7 +62,9 @@ def vendor_detail(request,vid):
 
 def product_detail(request,pid):
     product=Product.objects.get(pid=pid)
+    product_images = ProductImages.objects.filter(product=product)
     context={
         "product":product,
+        "product_images":product_images,
     }
     return render(request,"core/product-detail.html",context)

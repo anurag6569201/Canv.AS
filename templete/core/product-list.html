@@ -20,7 +20,7 @@
                    </div>
 
                     <span class="card-text-rating">Rating: 4.5</span><br>
-                    <span class="card-text-vendor"><span style="color: black;">By</span> {{ p.vendor.title }}</span>
+                    <span class="card-text-vendor"><span style="color: black;">By</span><a style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;" href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
 
                     <div class="last-line-text">
                         <div class="price-tags">
