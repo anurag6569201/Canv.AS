@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <div class="col-lg-5">
+        <div class="col-lg-5 mt-3 px-3">
             <span class="saleoff-btn">Sale Off</span>
             <h1 class="product-desc">{{ product.title }}</h1>
             <h2 class="rating">★★★★☆(30 review)</h2>
@@ -62,7 +62,7 @@
                     <div class="card-body">
                       <h1 class="card-title">Vendor</h1>
                         <div class="vend-product-detail">
-                            <span>{{ vendor.title }}</span>
+                            <a style="font-size: 1.2em; color: #dc6298;text-decoration-thickness: 1px;" href="{% url 'core:vendor_detail' vendor.vid %}">{{ vendor.title }}</a><br>
                             <span>★★★★☆(30 review)</span>
                         </div>
                       <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>

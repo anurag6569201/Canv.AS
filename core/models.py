@@ -173,3 +173,10 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Address"
+
+class FAQS(models.Model):
+    qtn=models.CharField(max_length=300, null=True)
+    ans=models.CharField(max_length=1000, null=True)
+
+    class Meta:
+        verbose_name_plural = "Faqs"

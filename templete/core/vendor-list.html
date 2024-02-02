@@ -4,13 +4,13 @@
 
 <div class="card product-category-card" style="margin-top: 110px;">
     <div class="card-body col-md-12">
-        <h5 class="card-title product-category-heading">Vendor-List</h5>
+        <h5 class="card-title product-category-heading">Artist-List</h5>
         <div class="breadcramb">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Shop</li>
-                  <li class="breadcrumb-item active" aria-current="page">Vendor</li>
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="/products">Shop</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Artist</li>
                 </ol>
               </nav>
         </div>
@@ -19,31 +19,33 @@
 
 <div class="card product-category-alert">
     <div class="card-body col-md-12">
-        <span class="text-primary">We Found {{ vendors.count }} vendors for you!</span>
+        <span class="text-primary">We Found {{ vendors.count }} Artist for you!</span>
 
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         {% for v in vendors %}
         <div class="col-md-6">
             <div class="card mb-3 vendor-card">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="{{ v.image.url }}" class="img-fluid rounded-start" alt="...">
+                <div class="row g-0" style="background-color: #f4f6f9;">
+                    <div class="col-md-4" style="display: flex;align-items: center;justify-content: center;">
+                        <a href="{% url 'core:vendor_detail' v.vid %}">
+                            <img style="border-radius: 50%;" src="{{ v.image.url }}" class="img-fluid rounded-start" alt="...">
+                        </a>
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">{{ v.title }}</h5>
+                            <h5 style="font-size: 3em;" class="card-title">{{ v.title }}</h5>
                             <h5 class="card-title">★★★★☆</h5>
                             <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 {{ v.description }}
                             </p>
                             <p class="card-text">{{ v.address }}</p>
                             <p class="card-text">{{ v.contact }}</p>
-                            <a href="{% url 'core:vendor_detail' v.vid %}" class="btn btn-primary">View Store</a>
-                            <p class="card-text"><small class="text-body-secondary">{{ v.vendors.all.count }}</small></p>
+                            <a href="{% url 'core:vendor_detail' v.vid %}" class="btn btn-primary" style="font-size: 1.2em;padding: .2em 2em;">View Profile</a>
+                            <span style="background-color: #dc6298;font-size: 1.2em;margin-left: 1em;" class="badge rounded-pill">{{ v.vendors.all.count }}</span>
                         </div>
                     </div>
                 </div>

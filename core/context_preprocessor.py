@@ -4,4 +4,5 @@ def default(request):
     categories=Category.objects.all()
     return {
         'globalcategory':categories,
+        'Vendor':Vendor,
     }

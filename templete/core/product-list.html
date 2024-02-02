@@ -3,9 +3,27 @@
 
 {% block content %}
 
-<div class="container" style="margin-top: 110px;">
+<div class="container-fluid" style="margin-top: 110px;">
     <div class="row">
+        <div class="card product-category-card">
+            <div class="card-body col-md-12">
+                <h5 class="card-title product-category-heading">All Products</h5>
+                <div class="breadcramb">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="/">Home</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                      </nav>
+                </div>
+            </div> 
+        </div>
+        <div class="card product-category-alert">
 
+            <div class="card-body col-md-12">
+                <span class="text-primary">We Found {{ product_count.count }} Products for you!</span>
+            </div>
+        </div>
         {% for p in products %}
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card Category-product">
@@ -14,27 +32,121 @@
                     <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
                 </a>
                 <div class="card-body">
-                   <div class="first-line-text">
-                    <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
-                    <!-- <h5 class="card-title">{{ p.title }}</h5> -->
-                   </div>
+                    <div class="first-line-text">
+                        <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                        <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                    </div>
 
                     <span class="card-text-rating">Rating: 4.5</span><br>
-                    <span class="card-text-vendor"><span style="color: black;">By</span><a style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;" href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
+                    <span class="card-text-vendor"><span style="color: black;">By</span><a
+                            style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;"
+                            href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
 
                     <div class="last-line-text">
                         <div class="price-tags">
                             <span class="card-text-price">{{ p.price }}</span>
                             <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
                         </div>
-                    <button class="btn btn-success product-cart">Add to Cart</button>
+                        <button class="btn btn-success product-cart">Add to Cart</button>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
         {% endfor %}
+        <style>
+            .pagination-outer {
+                text-align: center;
+            }
 
+            .pagination {
+                display: inline-flex;
+                position: relative;
+            }
+
+            .pagination:before {
+                content: "";
+                width: 100%;
+                height: 2px;
+                background: #e8e8e8;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+            }
+
+            .pagination li a.page-link {
+                padding: 5px 15px;
+                margin-right: 15px;
+                background: #f8f8f8;
+                border: 1px solid #e8e8e8;
+                border-radius: 5px;
+                box-shadow: 0 8px 6px -9px #5b5f5f;
+                font-size: 17px;
+                color: #686c6c;
+            }
+
+            .pagination li:first-child a.page-link {
+                margin-right: 30px;
+            }
+
+            .pagination li:last-child a.page-link {
+                margin: 0 0 0 15px;
+            }
+
+            .pagination li.active a.page-link,
+            .pagination li a.page-link:hover {
+                background: #dc6298;
+                border-color: #d3357c;
+                color: #fff;
+            }
+
+            @media only screen and (max-width: 479px) {
+                .pagination {
+                    display: block;
+                    overflow: auto;
+                }
+
+                .pagination:before {
+                    display: none;
+                }
+
+                .pagination li {
+                    display: inline-block;
+                }
+            }
+        </style>
+        
+        <div class="demo">
+            <br><br>
+            <nav class="pagination-outer" aria-label="Page navigation">
+                <ul class="pagination">
+                    <li class="page-item">
+                        {% if products.has_previous %}
+                        <a href="?page={{ products.previous_page_number }}" class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">Prev</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% for page in paginator.page_range %}
+                        {% if page == products.number %}
+                        <li class="page-item active"><a class="page-link">{{ page }}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{page}}">{{ page }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </li>
+                    <li>
+                        {% if products.has_next %}
+                        <a href="?page={{ products.next_page_number }}" class="page-link" aria-label="Next">
+                            <span aria-hidden="true">Next</span>
+                        </a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
 </div>
 

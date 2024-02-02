@@ -80,7 +80,7 @@
             </div>
         </div>
         
-<hr>
+    <hr>
         <div class="container" style="margin-top: 3em;">
             <div class="row">
                 <div class="col-md-12">
@@ -90,7 +90,7 @@
                 <div class="col-md-6 col-lg-4 mb-4">
                     <div class="card Category-product">
                         <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
-                        <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                        <a href="{% url 'core:product_detail' p.pid %}"><img src="{{ p.image.url }}" class="card-img-top product-image" alt="..."></a>
                         <div class="card-body">
                            <div class="first-line-text">
                             <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
@@ -114,8 +114,40 @@
                 {% endfor %}
                 
                 <div class="col-md-4">
-                    <a href="{% url 'core:product_list' %}" class="btn btn-primary card-text-category">View All...</a>
+                    <a style="padding: .2em 1em;" href="{% url 'core:product_list' %}" class="btn btn-primary card-text-category">View All...</a>
                 </div>
+            </div><br><hr><br>
+            <style>
+                .accordion-button:not(.collapsed):hover,
+                .accordion-button:hover{
+                    background-color: #dc62997a;
+                }
+                .accordion-button{
+                    background-color: #f4f6f9;
+                }
+                .accordion-button:not(.collapsed){
+                    background-color: #f4f6f9;
+                }
+            </style>
+            <div class="accordion" id="accordionExample">
+                <h1 style="font-size: 3em;">FAQS</h1><br>
+
+                {% for faq in faqs %}
+                    <div class="accordion-item" style="margin-bottom: 2em;">
+                        <h2 class="accordion-header">
+                            <button style="font-size: 1em;" class="accordion-button" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" 
+                                aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                                {{ faq.qtn }}
+                            </button>
+                        </h2>
+                        <div style="font-size: 1.6em;" id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#accorxample">
+                            <div class="accordion-body">
+                                {{ faq.ans }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 
