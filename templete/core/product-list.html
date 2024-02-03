@@ -5,6 +5,7 @@
 
 <div class="container-fluid" style="margin-top: 110px;">
     <div class="row">
+
         <div class="card product-category-card">
             <div class="card-body col-md-12">
                 <h5 class="card-title product-category-heading">All Products</h5>
@@ -16,14 +17,15 @@
                         </ol>
                       </nav>
                 </div>
-            </div> 
+            </div>
         </div>
-        <div class="card product-category-alert">
 
+        <div class="card product-category-alert">
             <div class="card-body col-md-12">
                 <span class="text-primary">We Found {{ product_count.count }} Products for you!</span>
             </div>
         </div>
+
         {% for p in products %}
         <div class="col-md-6 col-lg-3 mb-3">
             <div class="card Category-product">

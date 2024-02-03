@@ -37,7 +37,7 @@
                     <span style="font-size: 1.8em;">
                         Tags:
                         {% for tag in product.tagsss.all %}
-                        <a style="margin-right: .5em;" href="">#{{ tag.name }}</a>
+                        <a style="margin-right: .5em;" href="{% url 'core:tags' tag.slug %}">#{{ tag.name }}</a>
                         {% endfor %}
                         <br>
                     </span>

@@ -98,15 +98,17 @@ def product_detail(request,pid):
     return render(request,"core/product-detail.html",context)
 
 def tag_list(request, tag_slug=None):
-    products = Product.objects.filter(product_status="published").order_by("-id")
     tag = None
+
+    products=Product.objects.filter(product_status="publish").order_by('-id')
+
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        products = products.filter(tagsss=[tag.name])
+        products = products.filter(tagsss=tag)
 
     context = {
-        "products": products,
+        "prod": products,
         "tag": tag,
     }
 
