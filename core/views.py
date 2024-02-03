@@ -1,10 +1,11 @@
 from django.shortcuts import render,HttpResponse
-from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address
+from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,RATING
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from core.models import FAQS
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
+from django.db.models import Avg
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -88,11 +89,28 @@ def product_detail(request,pid):
     Addres=Address.objects.get(user=request.user)
     product_images = ProductImages.objects.filter(product=product)
     vendor = product.vendor
+
+    # all review
+    review=ProductReview.objects.filter(product=product).order_by("-date")
+
+    # avg review
+    avg_review=ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
+    total_reviews_count = review.count()
+
+    star_rating_percentages = {}
+    for rating, _ in RATING:
+        rating_count = review.filter(rating=rating).count()
+        percentage = (rating_count / total_reviews_count) * 100 if total_reviews_count != 0 else 0
+        star_rating_percentages[rating] = percentage
+
     context={
         "vendor":vendor,
         "product":product,
         "product_images":product_images,
         "Addres":Addres,
+        "review":review,
+        "avg_review":avg_review,
+        'star_rating_percentages': star_rating_percentages,
         "related_product":related_product,
     }
     return render(request,"core/product-detail.html",context)

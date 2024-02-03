@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/plugins/file-highlight/prism-file-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/themes/prism.min.css">
+<script>h1js.initHighlightingOnLoad();</script>
+<script src="{% static 'assets/js/prism.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assets/css/prism.css' %}">
 
 <div class="container-fluid" style="margin-top: 115px;">
     <div class="row">
@@ -32,7 +38,7 @@
                     </div>
                     
                     <br>
-                    <p class="product-descript">{{ product.description}}</p>
+                    <p class="product-descript">{{ product.description|safe}}</p>
                     {% if product.tagsss.all %}
                     <span style="font-size: 1.8em;">
                         Tags:
@@ -55,10 +61,77 @@
                     <div class="card">
                         <div class="card-body product-full-btn">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-secondary btn-sm">Review(3)</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Review {{ review.count }}</button>
                             </div>
                             <div class="col-md-12">
-                                {{ product.description }}
+
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            {% for rev in review %}
+                                            <div class="testimonial">
+                                                <br>
+                                                <div class="testimonial-profile">
+                                                    <div class="pic">
+                                                        <img style="width: 50px;height: 50px;" src="images/img-1.jpg">
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="title" style="padding: 0;margin: 0;">{{ rev.user.username|title }}</h3>
+                                                        <span class="post" style="font-size: 2em;">
+                                                            {% for i in "12345" %}
+                                                                {% if i|add:0 <= rev.rating %}
+                                                                    ★
+                                                                {% else %}
+                                                                    ☆
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </span>
+                                                        <span class="post">{{ rev.date|date:"d/ m/ Y" }}</span>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <p class="description">
+                                                    {{ rev.review }}
+                                                </p>
+                                                <br>
+                                            </div><hr>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="testimonial">
+                                                <br>
+
+                                                    <div>
+                                                        <h3 class="title" style="padding: 0;margin: 0;">Customer review</h3>
+                                                        <span class="post" style="font-size: 2em;">
+                                                            {% for i in "12345" %}
+                                                                {% if i|add:0 <= rev.rating %}
+                                                                    ★
+                                                                {% else %}
+                                                                    ☆
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </span>
+                                                        <span class="post"><span style="color: black;font-size: 1.2em;font-weight: 600;">Avg Ratings: </span>{{ avg_review.rating|floatformat:1 }} out of 5.0</span>
+                                                        <br>
+
+                                                        {% for star_rating in "54321" %}
+                                                            <div style="display: flex; align-items: center;">
+                                                                <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">{{ star_rating }} Star :</span>
+                                                                <div style="flex: 1; margin-left: 10px;">
+                                                                    <div class="progress" style="height: 20px;" role="progressbar" aria-label="{{ star_rating }} Star Rating" aria-valuenow="{{ star_rating_percentages }}" aria-valuemin="0" aria-valuemax="100">
+                                                                        <div class="progress-bar" style="width: {{ star_rating_percentages }}%; background-color: #ee92bb;"><span style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages{star_rating} }}%</span></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div><br>
+                                                        {% endfor %}
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
