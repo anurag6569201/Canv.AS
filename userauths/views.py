@@ -33,25 +33,26 @@ def login_view(request):
     if request.user.is_authenticated:
         messages.warning(request,f"Hey, You are already Logged in")
         return redirect('core:index')
+    else:
     
-    if request.method=="POST":
-        email=request.POST.get("email")
-        password=request.POST.get("password")
+        if request.method=="POST":
+            email=request.POST.get("email")
+            password=request.POST.get("password")
 
-        try:
-            user=User.object.get(email=email)
-        except:
-            messages.warning(request,f"User with {email} does not exist")
+            try:
+                user=User.object.get(email=email)
+            except:
+                messages.warning(request,f"User with {email} does not exist")
 
-        user=authenticate(request,email=email,password=password)
+            user=authenticate(request,email=email,password=password)
 
-        if user is not None:
-            login(request,user)
-            messages.success(request,"Your are logged in.")
-            return redirect("core:index")
-        
-        else:
-            messages.warning(request,"User Does not exist, create an accounnt")
+            if user is not None:
+                login(request,user)
+                messages.success(request,"Your are logged in.")
+                return redirect("core:index")
+            
+            else:
+                messages.warning(request,"User Does not exist, create an accounnt")
 
     context={
 

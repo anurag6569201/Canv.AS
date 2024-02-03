@@ -207,8 +207,7 @@ span.card-text-old-price{
 
 .dilevery-product .card-body p{
     text-align: left!important;
-    display: flex;
-    align-items: center;
+    
 }
 .delivery-address-change{
     background-color: #db7aa698;
@@ -223,4 +222,16 @@ span.card-text-old-price{
 .vend-product-detail{
     font-size: 1.8em;
     margin: 1em 0em;
+}
+
+
+/* product overview */
+.product-full-btn .btn{
+    background-color: transparent;
+    color: #bd3673;
+    padding: .3em 1em;
+    border: 1px solid #bd3673;
+    border-radius: 1em;
+    font-size: 1.2em;
+    margin-right: 1em;
 }

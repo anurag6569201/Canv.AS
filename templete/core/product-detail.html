@@ -5,49 +5,79 @@
 
 <div class="container-fluid" style="margin-top: 115px;">
     <div class="row">
-
-        <div class="col-lg-4">
-            <div class="card">
-                <img style="object-fit: contain;height: 70vh;" src="{{ product.image.url }}" class="card-img-top" alt="..." style="width: 100%; height: 40em;">
-                <div class="other-images">
-                    {% for prd_img in product_images %}
-                    <img style="width: 10em;height: 10em;margin: auto;" src="{{ prd_img.images.url }}" alt="">
-                    {% endfor %}
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card">
+                        <img class="card-img-top img-fluid" style="object-fit: contain;max-height: 70vh;" src="{{ product.image.url }}" alt="Product Image">
+                        <div class="other-images">
+                            {% for prd_img in product_images %}
+                                <img style="width: 10em; height: 10em; margin: auto;" src="{{ prd_img.images.url }}" alt="">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 mt-3 px-3">
+                    <span class="saleoff-btn">Sale Off</span>
+                    <h1 class="product-desc">{{ product.title }}</h1>
+                    <h2 class="rating">★★★★☆(30 reviews)</h2>
+                    <div class="some-price">
+                        <h1 class="product-price">
+                            <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span>{{ product.price }}
+                        </h1>
+                        <span class="old-price-tabs" style="margin-left: 1em;">
+                            <span class="percentage-price">-{{  product.get_percentage|floatformat:2 }}% Off</span>
+                            <span class="old-price"><del>{{ product.old_price }}</del></span>
+                        </span>
+                    </div>
+                    
+                    <br>
+                    <p class="product-descript">{{ product.description}}</p>
+                    {% if product.tagsss.all %}
+                    <span style="font-size: 1.8em;">
+                        Tags:
+                        {% for tag in product.tagsss.all %}
+                        <a style="margin-right: .5em;" href="">#{{ tag.name }}</a>
+                        {% endfor %}
+                        <br>
+                    </span>
+                    {% endif %}
+                    <div class="product-btn-group">
+                        <input type="number" value="1" min="1" class="quantity-btn">
+                        <button id="button2" class="add-to-cart-button">Add to cart <i class="fas fa-shopping-cart"></i></button>
+                        <button class="add-to-wishlist"><span style="font-size: 1em;" class="material-symbols-outlined">favorite</span></button>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <!-- Additional content as needed -->
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="card">
+                        <div class="card-body product-full-btn">
+                            <div class="col-md-12">
+                                <button type="button" class="btn btn-secondary btn-sm">Review(3)</button>
+                            </div>
+                            <div class="col-md-12">
+                                {{ product.description }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-lg-5 mt-3 px-3">
-            <span class="saleoff-btn">Sale Off</span>
-            <h1 class="product-desc">{{ product.title }}</h1>
-            <h2 class="rating">★★★★☆(30 review)</h2>
-            <div class="some-price">
-                <h1 class="product-price">
-                    <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span>{{ product.price }}
-                </h1>
-                <span class="old-price-tabs" style="margin-left: 1em;">
-                    <span class="percentage-price">-{{  product.get_percentage|floatformat:2 }}% Off</span>
-                    <span class="old-price"><del>{{ product.old_price }}</del></span>
-                </span>
-            </div>
-
-            <p class="product-descript">{{ product.description }}</p>
-
-          
-            <div class="product-btn-group">
-                <input type="number" value="1" min="1" class="quantity-btn">
-                <button id="button2" class="add-to-cart-button">Add to cart <i class="fas fa-shopping-cart"></i></button>
-                <button class="add-to-wishlist"><span style="font-size: 1em;" class="material-symbols-outlined">favorite</span></button>
-            </div>
-                    
-        </div>
-
-        <div class="col-lg-3">
+        <div class="col-md-3">
             <div class="dilevery-product">
                 <div class="card" style="width: 100%;">
                     <div class="card-body">
                       <h1 class="card-title">Delivery</h1>
-                      <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>
+                      <p class="card-text"><span style="display: flex;align-items: top;"><span class="material-symbols-outlined">location_on</span>{{ Addres.address }}</span>
+                            {% if Addres.status == True %} 
+                            <span style="display: flex;align-items: center;gap: .5em;color: #dc6298;">Verified Address<span class="material-symbols-outlined">check_circle</span></span>
+                            {% else %} 
+                            <span style="display: flex;align-items: center;gap: .5em;color: #af4b48;">Unverified Address<span class="material-symbols-outlined">check_circle</span></span>
+                            {% endif %}
+                        </p>
                       <a href="#" class="btn delivery-address-change">Change</a>
                         <br><br>
                       <hr>
@@ -67,12 +97,55 @@
                         </div>
                       <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>
                       <p class="card-text"><span class="material-symbols-outlined">person</span>9098691543</p>
-                        
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
 
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        {% if related_product %}
+        <div class="col-md-12">
+            <h1 style="font-size: 3em;margin-bottom: .5em;">Related Arts</h1><hr><br>
+        </div>
+        {% else %}
+        <div class="col-md-12">
+            <h1 style="font-size: 3em;margin-bottom: .5em;">No Related Arts</h1><hr><br>
+        </div>
+        {% endif %}
+        {% for p in related_product %}
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
+            <div class="card Category-product">
+                <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
+                <a href="{% url 'core:product_detail' p.pid %}">
+                    <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                </a>
+                <div class="card-body">
+                    <div class="first-line-text">
+                        <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                        <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                    </div>
+
+                    <span class="card-text-rating">Rating: 4.5</span><br>
+                    <span class="card-text-vendor"><span style="color: black;">By</span><a
+                            style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;"
+                            href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
+
+                    <div class="last-line-text">
+                        <div class="price-tags">
+                            <span class="card-text-price">{{ p.price }}</span>
+                            <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
+                        </div>
+                        <button class="btn btn-success product-cart">Add to Cart</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
 </div>
 
