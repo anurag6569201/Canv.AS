@@ -8,17 +8,18 @@
 <script>h1js.initHighlightingOnLoad();</script>
 <script src="{% static 'assets/js/prism.js' %}"></script>
 <link rel="stylesheet" href="{% static 'assets/css/prism.css' %}">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <div class="container-fluid" style="margin-top: 115px;">
     <div class="row">
         <div class="col-md-9">
             <div class="row">
                 <div class="col-md-5">
-                    <div class="card">
-                        <img class="card-img-top img-fluid" style="object-fit: contain;max-height: 70vh;" src="{{ product.image.url }}" alt="Product Image">
+                    <div class="card" style="background-color: white;border: none;">
+                        <img class="card-img-top img-fluid" style="object-fit: contain;max-height: 70vh;" src="{{ product.image.url }}" alt="Product Image"><hr>
                         <div class="other-images">
                             {% for prd_img in product_images %}
-                                <img style="width: 10em; height: 10em; margin: auto;" src="{{ prd_img.images.url }}" alt="">
+                                <img style="width: 10em; height: 10em; margin: auto; border: 2px solid #dc6298;margin-right: .5em;" src="{{ prd_img.images.url }}" alt="">
                             {% endfor %}
                         </div>
                     </div>
@@ -61,7 +62,7 @@
                     <div class="card">
                         <div class="card-body product-full-btn">
                             <div class="col-md-12">
-                                <button type="button" class="btn btn-secondary btn-sm">Review {{ review.count }}</button>
+                                <button style="font-size: 1.4em;" type="button" class="btn btn-secondary btn-sm">Review {{ review.count }}</button>
                             </div>
                             <div class="col-md-12">
 
@@ -94,8 +95,41 @@
                                                     {{ rev.review }}
                                                 </p>
                                                 <br>
-                                            </div><hr>
+                                            </div><hr><br>
+                                            <strong class="text-success" id="review-response" ></strong>
                                             {% endfor %}
+                                            <div class="col-md-12">
+                                                <br>
+                                                <form id="comment-form" class="form-control comment-form" method="POST" action="{% url 'core:ajax-add-review' product.pid %}">
+                                                    {% csrf_token %}
+                                                    
+                                                    <h1>Add a review</h1>
+                                                    {{ reivew_form }}
+                                                    <br>
+                                                    <button class="btn btn-primary product-cart">Submit Review</button>
+                                                </form>
+                                            </div>
+                                            <style>
+                                                .form-control{
+                                                    background-color: transparent;
+                                                    border: none;
+                                                }
+                                                :focus-visible {
+                                                    outline:0;
+                                                }
+                                                label{
+                                                    font-size: 1.8em;
+                                                    display: block;
+                                                    margin-bottom: .3em;
+                                                }
+                                                #id_rating,
+                                                #id_review{
+                                                    font-size: 1.8em;
+                                                    width: 100%;
+                                                    padding: .1em .5em;
+                                                    background-color: #f4f6f9b7;
+                                                }
+                                            </style>
                                         </div>
                                         <div class="col-md-5">
                                             <div class="testimonial">
@@ -105,7 +139,7 @@
                                                         <h3 class="title" style="padding: 0;margin: 0;">Customer review</h3>
                                                         <span class="post" style="font-size: 2em;">
                                                             {% for i in "12345" %}
-                                                                {% if i|add:0 <= rev.rating %}
+                                                                {% if i|add:0 <= avg_review.rating %}
                                                                     ★
                                                                 {% else %}
                                                                     ☆
@@ -115,16 +149,67 @@
                                                         <span class="post"><span style="color: black;font-size: 1.2em;font-weight: 600;">Avg Ratings: </span>{{ avg_review.rating|floatformat:1 }} out of 5.0</span>
                                                         <br>
 
-                                                        {% for star_rating in "54321" %}
-                                                            <div style="display: flex; align-items: center;">
-                                                                <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">{{ star_rating }} Star :</span>
-                                                                <div style="flex: 1; margin-left: 10px;">
-                                                                    <div class="progress" style="height: 20px;" role="progressbar" aria-label="{{ star_rating }} Star Rating" aria-valuenow="{{ star_rating_percentages }}" aria-valuemin="0" aria-valuemax="100">
-                                                                        <div class="progress-bar" style="width: {{ star_rating_percentages }}%; background-color: #ee92bb;"><span style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages{star_rating} }}%</span></div>
-                                                                    </div>
+                                                        
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">5 Star :</span>
+                                                            <div style="flex: 1; margin-left: 10px;">
+                                                                <div class="progress" style="height: 20px;" role="progressbar" aria-label="5 Star Rating" aria-valuenow="{{ star_rating_percentages.5|floatformat:1 }}" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="percentage_rev" style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages.5|floatformat:1 }}%</span>
+                                                                    <div class="progress-bar" style="width: {{ star_rating_percentages.5|floatformat:1 }}%; background-color: #ee92bb;"></div>
                                                                 </div>
-                                                            </div><br>
-                                                        {% endfor %}
+                                                            </div>
+                                                        </div><br>
+
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">4 Star :</span>
+                                                            <div style="flex: 1; margin-left: 10px;">
+                                                                <div class="progress" style="height: 20px;" role="progressbar" aria-label="4 Star Rating" aria-valuenow="{{ star_rating_percentages.4|floatformat:1 }}" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="percentage_rev" style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages.4|floatformat:1 }}%</span>
+                                                                    <div class="progress-bar" style="width: {{ star_rating_percentages.4|floatformat:1 }}%; background-color: #ee92bb;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">3 Star :</span>
+                                                            <div style="flex: 1; margin-left: 10px;">
+                                                                <div class="progress" style="height: 20px;" role="progressbar" aria-label="3 Star Rating" aria-valuenow="{{ star_rating_percentages.3|floatformat:1 }}" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="percentage_rev" style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages.3|floatformat:1 }}%</span>
+                                                                    <div class="progress-bar" style="width: {{ star_rating_percentages.3|floatformat:1 }}%; background-color: #ee92bb;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">2 Star :</span>
+                                                            <div style="flex: 1; margin-left: 10px;">
+                                                                <div class="progress" style="height: 20px;" role="progressbar" aria-label="2 Star Rating" aria-valuenow="{{ star_rating_percentages.2|floatformat:1 }}" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="percentage_rev" style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages.2|floatformat:1 }}%</span>
+                                                                    <div class="progress-bar" style="width: {{ star_rating_percentages.2|floatformat:1 }}%; background-color: #ee92bb;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+
+                                                        <div style="display: flex; align-items: center;">
+                                                            <span style="font-size: 1.8em; padding: 0; margin: 0; font-weight: 600;">1 Star :</span>
+                                                            <div style="flex: 1; margin-left: 10px;">
+                                                                <div class="progress" style="height: 20px;" role="progressbar" aria-label="1 Star Rating" aria-valuenow="{{ star_rating_percentages.1|floatformat:1 }}" aria-valuemin="0" aria-valuemax="100">
+                                                                    <span class="percentage_rev" style="font-size: 1.6em; font-weight: 700;">{{ star_rating_percentages.1|floatformat:1 }}%</span>
+                                                                    <div class="progress-bar" style="width: {{ star_rating_percentages.1|floatformat:1 }}%; background-color: #ee92bb;"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div><br>
+
+                                                        <style>
+                                                            .progress{
+                                                                position: relative;
+                                                            }
+                                                            .percentage_rev{
+                                                                position: absolute;
+                                                                left: .5em;
+                                                            }
+                                                        </style>
+                                                        
                                                     </div>
                                                 
                                             </div>
@@ -171,7 +256,31 @@
                       <p class="card-text"><span class="material-symbols-outlined">location_on</span>{{ product.delivery_address }}</p>
                       <p class="card-text"><span class="material-symbols-outlined">person</span>9098691543</p>
                     </div>
+                </div><br><br>
+                <div class="left-category" style="padding: 1em; border: 1px solid #c9cbcd;background-color: #f4f6f9;">
+                    <ol class="list-group list-group-numbered">
+                        <h1 class="heading" style="font-size: 3em;margin-bottom: .5em;margin-top: .3em;">Category</h1>
+                        {% for c in globalcategory %}
+                        <li class="list-group-item d-flex justify-content-between align-items-start" style="font-size: 1.8em;padding: .5em;background-color: #f4f6f9;border-radius: .5em;margin-bottom: .5em;">
+                            <div class="ms-2 me-auto">
+                                <div class="fw-bold">{{ c.title }}</div>
+                                <img class="rounded-circle" style="width: 20px; height: 20px; margin-right: 1em;" src="{{ c.image.url }}" alt="">
+                                <a style="font-size: .8em;" class="btn btn-primary card-text-category" href="{% url 'core:product_list_category' c.cid %}">Have a look!!</a>
+                            </div>
+                            <span style="background-color: #dc6298;" class="badge rounded-pill">{{ c.category.count }}</span>
+                        </li>
+                        {% endfor %}
+                        <div class="col-md-12" style="margin-top: 1em;font-size: 1.2em;">
+                            <a href="{% url 'core:product_list' %}" class="btn btn-primary card-text-category">Shop Now...</a>
+                        </div>
+                    </ol>
+                    
                 </div>
+                <style>
+                    .card{
+                        background-color: #f4f6f9;
+                    }
+                </style>
             </div>
         </div>
     </div>

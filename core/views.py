@@ -6,6 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
 from django.db.models import Avg
+from core.forms import ProductReviewForm
+from django.http import JsonResponse
+from django.shortcuts import redirect
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -97,6 +100,9 @@ def product_detail(request,pid):
     avg_review=ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
     total_reviews_count = review.count()
 
+    # review form
+    reivew_form=ProductReviewForm()
+
     star_rating_percentages = {}
     for rating, _ in RATING:
         rating_count = review.filter(rating=rating).count()
@@ -112,15 +118,13 @@ def product_detail(request,pid):
         "avg_review":avg_review,
         'star_rating_percentages': star_rating_percentages,
         "related_product":related_product,
+        'reivew_form':reivew_form,
     }
     return render(request,"core/product-detail.html",context)
 
 def tag_list(request, tag_slug=None):
     tag = None
-
     products=Product.objects.filter(product_status="publish").order_by('-id')
-
-
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         products = products.filter(tagsss=tag)
@@ -129,5 +133,25 @@ def tag_list(request, tag_slug=None):
         "prod": products,
         "tag": tag,
     }
-
     return render(request, "core/tag.html", context)
+
+def ajax_add_review(request,pid):
+    product=Product.objects.get(pid=pid)
+    user=request.user
+
+    review=ProductReview.objects.create(
+        user=user,
+        product=product,
+        review=request.POST['review'],
+        rating=request.POST['rating'],
+    )
+
+    context={
+        'user':user.username,
+        'review':request.POST['review'],
+        'rating':request.POST['rating'],
+    }
+
+    avg_review=ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
+
+    return redirect("core:product_detail", pid=product.pid)
