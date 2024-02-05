@@ -53,7 +53,12 @@
                             <span class="card-text-price">{{ p.price }}</span>
                             <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
                         </div>
-                        <button class="btn btn-success product-cart">Add to Cart</button>
+                        <input type="hidden" value="{{ p.price }}" class="current-product-price-{{ p.pk }}">
+                        <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.pk }}">
+                        <input type="hidden" class="product-id-{{ p.pk }}" value="{{ p.pk }}">
+                        <input type="hidden" class="product-pid-{{ p.pk }}" value="{{ p.pid }}">
+                        <input type="hidden" class="product-title-{{ p.pk }}" value="{{ p.title }}">
+                        <button class="add-to-cart-button btnadd" data-index="{{ p.pk }}"><i class="fas fa-shopping-cart"></i></button>
                     </div>
 
                 </div>

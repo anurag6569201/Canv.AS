@@ -42,6 +42,7 @@
                         aria-label="Search" name="q">
                     <button class="btn btn-outline-success" style="width: 20em;" style="font-size: 1.8em;"
                         type="submit"><span style="font-size: 1.8em;">Search</span></button>
+                    <button class="add-to-cart-button" style="display: flex;align-items: center;justify-content: center;margin-left: .5em;"><span class="cart-items-count" style="font-size: 1.2em;">{{ request.session.cart_data_obj|length }}</span><i class="fas fa-shopping-cart"></i></button>
                 </form>
 
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
@@ -252,6 +253,8 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/5d90022efb.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script src="{% static 'assets/js/action.js' %}"></script>
 <script src="{% static 'assets/js/registration.js' %}"></script>
 

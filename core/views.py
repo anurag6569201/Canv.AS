@@ -9,6 +9,8 @@ from django.db.models import Avg
 from core.forms import ProductReviewForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.contrib.sessions.models import Session
+
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -165,3 +167,27 @@ def search_view(request):
         'query':query,
     }
     return render(request,"core/search.html",context)
+
+def add_to_cart(request):
+    cart_product={}
+    cart_product[str(request.GET['id'])]={
+        'title':request.GET['title'],
+        'qty':request.GET['qty'],
+        'price':request.GET['price'],
+        'pid':request.GET['product_pid'],
+    }
+    if 'cart_data_obj' in request.session:
+        if str(request.GET['id']) in request.session['cart_data_obj']:
+            cart_data=request.session['cart_data_obj']
+            cart_data[str(request.GET['id'])]['qty']=int(cart_product[str(request.GET['id'])]['qty'])
+            cart_data.update(cart_data)
+            request.session['cart_data_obj']=cart_data
+        else:
+            cart_data=request.session['cart_data_obj']
+            cart_data.update(cart_product)
+            request.session['cart_data_obj']=cart_data
+    else:
+        request.session['cart_data_obj']=cart_product
+    
+    return JsonResponse({"data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj'])})
+        

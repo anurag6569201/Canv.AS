@@ -24,4 +24,7 @@ urlpatterns=[
 
     # search
     path("search/",views.search_view,name="search"),
+
+    #add to cart
+    path("add-to-cart/",views.add_to_cart,name="add-to-cart"),
 ] 

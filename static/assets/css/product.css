@@ -187,6 +187,13 @@ span.card-text-old-price{
     outline-offset: 0px;
     outline:0px;
 }
+.btn-outline-success{
+    font-size: 1em;
+    border: 1px solid #bd3673;
+    color: #bd3673;
+    padding: 0 1em;
+    border-radius: 4px; 
+}
 .add-to-wishlist,
 .add-to-cart-button{
     font-size: 1.8em;
@@ -195,9 +202,7 @@ span.card-text-old-price{
     padding: 0 1em;
     border-radius: 4px;
 }
-.add-to-cart-button{
-    background-color: #db7aa698;
-}
+.btn-outline-success:hover,
 .delivery-address-change:hover,
 .add-to-wishlist:hover,
 .add-to-cart-button:hover{

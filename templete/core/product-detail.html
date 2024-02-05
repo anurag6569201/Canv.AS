@@ -30,7 +30,7 @@
                     <h2 class="rating">★★★★☆(30 reviews)</h2>
                     <div class="some-price">
                         <h1 class="product-price">
-                            <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span>{{ product.price }}
+                            <span class="material-symbols-outlined" style="font-size: .8em;">currency_rupee</span><span  class="current-product-price">{{ product.price }}</span>
                         </h1>
                         <span class="old-price-tabs" style="margin-left: 1em;">
                             <span class="percentage-price">-{{  product.get_percentage|floatformat:2 }}% Off</span>
@@ -50,8 +50,13 @@
                     </span>
                     {% endif %}
                     <div class="product-btn-group">
-                        <input type="number" value="1" min="1" class="quantity-btn">
-                        <button id="button2" class="add-to-cart-button">Add to cart <i class="fas fa-shopping-cart"></i></button>
+                            <input type="number" value="1" min="1" class="quantity-btn product-quantity-{{ product.pk }}" id="product-quantity">
+                            <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ product.pk }}">
+                            <input type="hidden" class="product-id-{{ product.pk }}" value="{{ product.pk }}">
+                            <input type="hidden" value="{{ product.price }}" class="current-product-price-{{ product.pk }}">
+                            <input type="hidden" class="product-pid-{{ product.pk }}" value="{{ product.pid }}">
+                            <input type="hidden" class="product-title-{{ product.pk }}" value="{{ product.title }}">
+                            <button class="add-to-cart-button btnadd" data-index="{{ product.pk }}"><i class="fas fa-shopping-cart"></i></button>
                         <button class="add-to-wishlist"><span style="font-size: 1em;" class="material-symbols-outlined">favorite</span></button>
                     </div>
                 </div>
@@ -302,28 +307,30 @@
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="card Category-product">
                 <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
-                <a href="{% url 'core:product_detail' p.pid %}">
-                    <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
-                </a>
+                <a href="{% url 'core:product_detail' p.pid %}"><img src="{{ p.image.url }}" class="card-img-top product-image" alt="..."></a>
                 <div class="card-body">
                     <div class="first-line-text">
-                        <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
-                        <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                    <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                    <!-- <h5 class="card-title">{{ p.title }}</h5> -->
                     </div>
 
                     <span class="card-text-rating">Rating: 4.5</span><br>
-                    <span class="card-text-vendor"><span style="color: black;">By</span><a
-                            style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;"
-                            href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
+                    <span class="card-text-vendor"><span style="color: black;">By</span> {{ p.vendor.title }}</span>
 
                     <div class="last-line-text">
                         <div class="price-tags">
                             <span class="card-text-price">{{ p.price }}</span>
                             <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
                         </div>
-                        <button class="btn btn-success product-cart">Add to Cart</button>
+                    
+                    <input type="hidden" value="{{ p.price }}" class="current-product-price-{{ p.pk }}">
+                    <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.pk }}">
+                    <input type="hidden" class="product-id-{{ p.pk }}" value="{{ p.pk }}">
+                    <input type="hidden" class="product-pid-{{ p.pk }}" value="{{ p.pid }}">
+                    <input type="hidden" class="product-title-{{ p.pk }}" value="{{ p.title }}">
+                    <button class="add-to-cart-button btnadd" data-index="{{ p.pk }}"><i class="fas fa-shopping-cart"></i></button>
                     </div>
-
+                    
                 </div>
             </div>
         </div>
