@@ -44,7 +44,9 @@ body::-webkit-scrollbar {
 .menu a:hover {
     text-shadow: 2px 4px 4px grey;
 }
-
+.form-control:focus {
+    box-shadow: none;
+}
 /* nav end */
 
 /* hero */

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/product.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/cart.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/registrationn.css' %}">
     <link rel="stylesheet" href="{% static 'assets/css/review.css' %}">
 
@@ -42,7 +43,7 @@
                         aria-label="Search" name="q">
                     <button class="btn btn-outline-success" style="width: 20em;" style="font-size: 1.8em;"
                         type="submit"><span style="font-size: 1.8em;">Search</span></button>
-                    <button class="add-to-cart-button" style="display: flex;align-items: center;justify-content: center;margin-left: .5em;"><span class="cart-items-count" style="font-size: 1.2em;">{{ request.session.cart_data_obj|length }}</span><i class="fas fa-shopping-cart"></i></button>
+                    <a href="{% url 'core:cart' %}" class="add-to-cart-button" style="display: flex;align-items: center;justify-content: center;margin-left: .5em;text-decoration: none;"><span class="cart-items-count" style="font-size: 1.2em;">{{ request.session.cart_data_obj|length }}</span><i class="fas fa-shopping-cart"></i></a>
                 </form>
 
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"

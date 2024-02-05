@@ -48,6 +48,7 @@
                             </div>
                             <input type="hidden" value="{{ p.price }}" class="current-product-price-{{ p.pk }}">
                             <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.pk }}">
+                            <input type="hidden" class="product-image-{{ p.pk }}" value="{{ p.image.url }}">
                             <input type="hidden" class="product-id-{{ p.pk }}" value="{{ p.pk }}">
                             <input type="hidden" class="product-pid-{{ p.pk }}" value="{{ p.pid }}">
                             <input type="hidden" class="product-title-{{ p.pk }}" value="{{ p.title }}">

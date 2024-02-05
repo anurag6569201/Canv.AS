@@ -1,0 +1,109 @@
+
+.cart .title{
+    margin-bottom: 5vh;
+}
+.cart .card{
+    margin: auto;
+    max-width: 950px;
+    width: 90%;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 1rem;
+    border: none;
+}
+@media(max-width:767px){
+    .cart .card{
+        margin: 3vh auto;
+    }
+}
+.cart {
+    background-color: #fff;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+}
+@media(max-width:767px){
+    .cart .cart{
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+    }
+}
+.cart .summary{
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    color: rgb(65, 65, 65);
+    padding: 0 3em;
+}
+@media(max-width:767px){
+    .cart .summary{
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1rem;
+    }
+}
+.cart .summary .col-2{
+    padding: 0;
+}
+.cart .summary .col-10
+{
+    padding: 0;
+}
+.cart .row{
+    margin: 0;
+}
+.cart .main{
+    margin: 0;
+    width: 100%;
+}
+.cart .col-2, .col{
+    padding: 0 1vh;
+}
+.cart a{
+    padding: 0 1vh;
+}
+.cart .close{
+    margin-left: auto;
+    font-size: 0.7rem;
+}
+.cart .back-to-shop{
+    margin-top: 4.5rem;
+}
+.cart hr{
+    margin-top: 1.25rem;
+}
+.cart select{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+.cart input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+.cart input:focus::-webkit-input-placeholder{
+    color:transparent;
+}
+
+.cart a{
+    color: black; 
+}
+.cart a:hover{
+    color: black;
+    text-decoration: none;
+}
+.cart #code{
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+}
+.cart img{
+    width: 25em;
+}
+.cart form{
+    background-color: #f4f6f9;
+    border: 1px solid #d5d6d8;
+    padding: 2em 2em;
+}

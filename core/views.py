@@ -9,8 +9,7 @@ from django.db.models import Avg
 from core.forms import ProductReviewForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
-from django.contrib.sessions.models import Session
-
+from django.template.loader import render_to_string
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -160,7 +159,7 @@ def ajax_add_review(request,pid):
 
 def search_view(request):
     query=request.GET.get("q")
-    products=Product.objects.filter(tagsss__name__icontains=query).order_by("-date")
+    products=Product.objects.filter(tagsss__name__icontains=query).order_by("-date").distinct()
     
     context={
         'products':products,
@@ -175,6 +174,7 @@ def add_to_cart(request):
         'qty':request.GET['qty'],
         'price':request.GET['price'],
         'pid':request.GET['product_pid'],
+        'image':request.GET['product_image'],
     }
     if 'cart_data_obj' in request.session:
         if str(request.GET['id']) in request.session['cart_data_obj']:
@@ -190,4 +190,29 @@ def add_to_cart(request):
         request.session['cart_data_obj']=cart_product
     
     return JsonResponse({"data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj'])})
+
+def cart_view(request):
+    cart_total_amount=0
+    if 'cart_data_obj' in request.session:
+        for product_id,item in request.session['cart_data_obj'].items():
+            cart_total_amount+=int(item['qty'])*float(item['price'])
+        return render(request,"core/cart.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+    else:
+        return render(request,"core/cart.html",{"cart_data":'','totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+
+def delete_item_from_cart(request):
+    product_id=str(request.GET['id'])
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+            cart_data=request.session['cart_data_obj']
+            del request.session['cart_data_obj'][product_id]
+            request.session['cart_data_obj']=cart_data
+
+    cart_total_amount=0
+    if 'cart_data_obj' in request.session:
+        for product_id,item in request.session['cart_data_obj'].items():
+            cart_total_amount+=int(item['qty'])*float(item['price'])
         
+        context=render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+
+        return JsonResponse({"data":context,'totalcartitems':len(request.session['cart_data_obj'])})

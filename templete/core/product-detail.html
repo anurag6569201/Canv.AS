@@ -56,6 +56,7 @@
                             <input type="hidden" value="{{ product.price }}" class="current-product-price-{{ product.pk }}">
                             <input type="hidden" class="product-pid-{{ product.pk }}" value="{{ product.pid }}">
                             <input type="hidden" class="product-title-{{ product.pk }}" value="{{ product.title }}">
+                            <input type="hidden" class="product-image-{{ product.pk }}" value="{{ product.image.url }}">
                             <button class="add-to-cart-button btnadd" data-index="{{ product.pk }}"><i class="fas fa-shopping-cart"></i></button>
                         <button class="add-to-wishlist"><span style="font-size: 1em;" class="material-symbols-outlined">favorite</span></button>
                     </div>
@@ -325,6 +326,7 @@
                     
                     <input type="hidden" value="{{ p.price }}" class="current-product-price-{{ p.pk }}">
                     <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.pk }}">
+                    <input type="hidden" class="product-image-{{ p.pk }}" value="{{ p.image.url }}">
                     <input type="hidden" class="product-id-{{ p.pk }}" value="{{ p.pk }}">
                     <input type="hidden" class="product-pid-{{ p.pk }}" value="{{ p.pid }}">
                     <input type="hidden" class="product-title-{{ p.pk }}" value="{{ p.title }}">

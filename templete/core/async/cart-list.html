@@ -1,0 +1,121 @@
+
+<div id="cart-list" class="card product-category-card" style="margin-top: 110px;">
+    <div class="card-body col-md-12">
+        <h5 class="card-title product-category-heading">Your Cart</h5>
+        <div class="breadcramb">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page"><a href="/products">Shop</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                </ol>
+              </nav>
+        </div>
+    </div> 
+</div>
+
+<div class="card product-category-alert">
+    <div class="card-body col-md-12">
+        <span class="text-primary">We Found {{ request.session.cart_data_obj|length }} items in your cart!</span>
+    </div>
+</div>
+<div class="card cart" style="border: none;">
+    <div class="row">
+        <div class="col-md-8">
+            <style>
+                .table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+            
+                th, td {
+                    border: 1px solid #ddd; 
+                    padding: 8px;
+                    text-align: center; 
+                    vertical-align: middle; 
+                }
+            
+                .img-fluid {
+                    object-fit: contain;
+                    max-height: 50px; 
+                }
+            </style>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th style="background-color: #f4f6f9;">
+                            <input type="checkbox" name="checkbox" id="checkbox_id">
+                        </th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Product</th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Price</th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Quantity</th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Subtotal</th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Refresh</th>
+                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product_id, item in cart_data.items %}
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="checkbox" id="checkbox_id">
+                            </td>
+                            <td>
+                                <div class="row main align-items-center">
+                                    <div class="col-2" style="display: flex; align-items: center; justify-content: center;">
+                                        <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}">
+                                    </div>
+                                    <div class="col">
+                                        <a href="{% url 'core:product_detail' item.pid %}" style="text-decoration: none;"><div style="font-size: 1.8em;" class="row text-muted">{{ item.title }}</div></a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="font-size: 1.4em;">&#x20b9; {{ item.price }}</td>
+                            <td>
+                                <div class="col" style="display: flex; align-items: center; justify-content: center;">
+                                    <input type="number" value="{{ item.qty }}" min="1" class="quantity-btn" id="product-quantity">
+                                </div>
+                            </td>
+                            <td style="font-size: 1.4em;">&#x20b9; {% widthratio item.price 1 item.qty %}</td>
+                            <td style="font-size: 1.8em;" data-title="Refresh"><a href="#"><span class="material-symbols-outlined">refresh</span></a></td>
+                            
+                            <td class="delete-cart"><button style="font-size: 1.8em;border: none;background-color: transparent;" data-product="{{ product_id }}" class="close"><span class="material-symbols-outlined">delete</span></button></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                
+            <div class="back-to-shop col-md-3"><a style="padding: .2em 1em;display: flex;align-items: center;justify-content: center;" href="{% url 'core:product_list' %}" class="btn btn-primary card-text-category"><span class="material-symbols-outlined" style="margin-right: .5em;">arrow_back</span>Back to shop</a></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div><h1>Summary</h1></div>
+            <hr>
+            
+            <form>
+                <div class="row">
+                    <div class="col" style="padding-left:0;font-size: 1.4em;"> {{ request.session.cart_data_obj|length }} Items</div>
+                    <div class="col text-right" style="font-size: 1.4em;">&#x20b9; {{ cart_total_amount|floatformat }}</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;font-size: 1.4em;"> Shipping</div>
+                    <div class="col text-right" style="font-size: 1.4em;">Free</div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;font-size: 1.4em;">TOTAL PRICE</div>
+                    <div class="col text-right" style="font-size: 1.4em;">&#x20b9; {{ cart_total_amount|floatformat }}</div>
+                </div>
+                <br>
+                {% if cart_total_amount %}
+                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;">CHECKOUT</button>
+                {% else %}
+                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;pointer-events: none;">CHECKOUT</button>
+                {% endif %}
+            </form>
+            
+        </div>
+    </div>
+    
+</div>
