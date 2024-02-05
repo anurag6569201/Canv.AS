@@ -1,0 +1,67 @@
+{% extends 'partials/basemain.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid" style="margin-top: 110px;">
+    <div class="row">
+
+        <div class="card product-category-card">
+            <div class="card-body col-md-12">
+                {% if query %}
+                <h5 class="card-title product-category-heading">{{ query }}</h5>
+                {% else %}
+                <h5 class="card-title product-category-heading">No Searched art</h5>
+                {% endif %}
+                <div class="breadcramb">
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="/">Home</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                      </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="card product-category-alert">
+            <div class="card-body col-md-12">
+                <span class="text-primary">We Found {{ products.count }} Products for you!</span>
+            </div>
+        </div>
+
+        {% for p in products %}
+        <div class="col-md-6 col-lg-3 mb-3">
+            <div class="card Category-product">
+                <span class="badge bg-danger discount-badge">-{{ p.get_percentage|floatformat }}%</span>
+                <a href="{% url 'core:product_detail' p.pid %}">
+                    <img src="{{ p.image.url }}" class="card-img-top product-image" alt="...">
+                </a>
+                <div class="card-body">
+                    <div class="first-line-text">
+                        <a class="btn btn-primary card-text-category">{{ p.category.title }}</a>
+                        <!-- <h5 class="card-title">{{ p.title }}</h5> -->
+                    </div>
+
+                    <span class="card-text-rating">Rating: 4.5</span><br>
+                    <span class="card-text-vendor"><span style="color: black;">By</span><a
+                            style="color: #dc6298;text-decoration-thickness: 1px; margin-left: .5em;"
+                            href="{% url 'core:vendor_list' %}">{{ p.vendor.title }}</a></span>
+
+                    <div class="last-line-text">
+                        <div class="price-tags">
+                            <span class="card-text-price">{{ p.price }}</span>
+                            <span class="card-text-old-price"><del>{{ p.old_price }}</del></span>
+                        </div>
+                        <button class="btn btn-success product-cart">Add to Cart</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}

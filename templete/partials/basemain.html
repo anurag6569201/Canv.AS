@@ -37,9 +37,9 @@
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <form class="d-flex" role="search" style="height: 40px;width: 100%;">
+                <form class="d-flex" role="search" style="height: 40px;width: 100%;" method="GET" action="{% url 'core:search' %}">
                     <input style="font-size: 1.8em;border: 1px solid #c9cbcd;" class="form-control me-2" type="search" placeholder="Search"
-                        aria-label="Search">
+                        aria-label="Search" name="q">
                     <button class="btn btn-outline-success" style="width: 20em;" style="font-size: 1.8em;"
                         type="submit"><span style="font-size: 1.8em;">Search</span></button>
                 </form>

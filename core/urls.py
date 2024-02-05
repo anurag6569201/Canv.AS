@@ -20,5 +20,8 @@ urlpatterns=[
     path('product/tag/<slug:tag_slug>',views.tag_list,name='tags'),
 
     # add review
-    path('ajax-add-review/<pid>/',views.ajax_add_review,name="ajax-add-review")
+    path('ajax-add-review/<pid>/',views.ajax_add_review,name="ajax-add-review"),
+
+    # search
+    path("search/",views.search_view,name="search"),
 ] 

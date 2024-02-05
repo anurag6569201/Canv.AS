@@ -155,3 +155,13 @@ def ajax_add_review(request,pid):
     avg_review=ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
 
     return redirect("core:product_detail", pid=product.pid)
+
+def search_view(request):
+    query=request.GET.get("q")
+    products=Product.objects.filter(tagsss__name__icontains=query).order_by("-date")
+    
+    context={
+        'products':products,
+        'query':query,
+    }
+    return render(request,"core/search.html",context)
