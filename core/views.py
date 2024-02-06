@@ -10,6 +10,8 @@ from core.forms import ProductReviewForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
+import razorpay
+from django.conf import settings
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -196,27 +198,17 @@ def cart_view(request):
     if 'cart_data_obj' in request.session:
         for product_id,item in request.session['cart_data_obj'].items():
             cart_total_amount+=int(item['qty'])*float(item['price'])
-        return render(request,"core/cart.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+        
+        client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
+        payment=client.order.create({'amount':cart_total_amount*100,'currency':'INR','payment_capture':1})
+        cart_order, created = CartOrder.objects.get_or_create(user=request.user)
+        cart_order.price = cart_total_amount  # Update the total price if necessary
+        cart_order.save()
+       
+        return render(request,"core/cart.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'payment':payment})
     else:
         return render(request,"core/cart.html",{"cart_data":'','totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
-def delete_item_from_cart(request):
-    product_id=str(request.GET['id'])
-    if 'cart_data_obj' in request.session:
-        if product_id in request.session['cart_data_obj']:
-            cart_data=request.session['cart_data_obj']
-            del request.session['cart_data_obj'][product_id]
-            request.session['cart_data_obj']=cart_data
-
-    cart_total_amount=0
-    if 'cart_data_obj' in request.session:
-        for product_id,item in request.session['cart_data_obj'].items():
-            cart_total_amount+=int(item['qty'])*float(item['price'])
-        
-        context={"core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount}}
-
-        return JsonResponse({"data":context,'totalcartitems':len(request.session['cart_data_obj'])})
-    
 
 def update_from_cart(request):
     product_id=str(request.GET['id'])
@@ -232,15 +224,21 @@ def update_from_cart(request):
         for product_id,item in request.session['cart_data_obj'].items():
             cart_total_amount+=int(item['qty'])*float(item['price'])
         
-        context=render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+        client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
+        payment=client.order.create({'amount':cart_total_amount*100,'currency':'INR','payment_capture':1})
+        cart_order, created = CartOrder.objects.get_or_create(user=request.user)
+        cart_order.price = cart_total_amount  # Update the total price if necessary
+        cart_order.save()
+       
+        
+        context=render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'payment':payment})
 
         return JsonResponse({"data":context,'totalcartitems':len(request.session['cart_data_obj'])})
     
 
-def checkout_view(request):
-    cart_total_amount=0
-    if 'cart_data_obj' in request.session:
-        for product_id,item in request.session['cart_data_obj'].items():
-            cart_total_amount+=int(item['qty'])*float(item['price'])
-        
-        return render(request,"core/checkout.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+def success(request):
+    order_id=request.GET.get('order_id')
+    cart=CartOrder.objects.get(razor_pay_order_id=order_id)
+    cart.paid_track=True
+    cart.save()
+    return HttpResponse("Payment success")

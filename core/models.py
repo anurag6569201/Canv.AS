@@ -142,6 +142,9 @@ class CartOrder(models.Model):
     paid_track = models.BooleanField(default=False)
     order_date = models.DateTimeField(auto_now_add=True)
     product_status = models.CharField(choices=STATUS_CHOICES, max_length=30, default="processing")
+    razor_pay_order_id=models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_id=models.CharField(max_length=100,null=True,blank=True)
+    razor_pay_payment_signature=models.CharField(max_length=100,null=True,blank=True)
 
     class Meta:
         verbose_name_plural = "Cart Orders"

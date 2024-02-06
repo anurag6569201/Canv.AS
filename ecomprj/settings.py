@@ -172,3 +172,6 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+KEY='rzp_test_LcYoGkJW1B1wMM'
+SECRET='9u4i7XvFk9Oh1QnTJGXBD43V'
