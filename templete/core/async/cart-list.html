@@ -109,9 +109,9 @@
                 </div>
                 <br>
                 {% if cart_total_amount %}
-                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;">CHECKOUT</button>
+                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;"><a href="{% url 'core:checkout' %}" style="text-decoration: none;color: #bd3673;">CHECKOUT</a></button>
                 {% else %}
-                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;pointer-events: none;">CHECKOUT</button>
+                <button class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;pointer-events: none;"><a href="{% url 'core:checkout' %}" style="text-decoration: none;color: #bd3673;">CHECKOUT</a></button>
                 {% endif %}
             </form>
             
