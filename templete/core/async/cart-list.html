@@ -16,7 +16,7 @@
 
 <div class="card product-category-alert">
     <div class="card-body col-md-12">
-        <span class="text-primary">We Found {{ request.session.cart_data_obj|length }} items in your cart!</span>
+        <span class="text-primary">We Found {{ totalcartitems }} items in your cart!</span>
     </div>
 </div>
 <div class="card cart" style="border: none;">
@@ -94,7 +94,7 @@
             
             <form>
                 <div class="row">
-                    <div class="col" style="padding-left:0;font-size: 1.4em;"> {{ request.session.cart_data_obj|length }} Items</div>
+                    <div class="col" style="padding-left:0;font-size: 1.4em;"> {{ totalcartitems }} Items</div>
                     <div class="col text-right" style="font-size: 1.4em;">&#x20b9; {{ cart_total_amount|floatformat }}</div>
                 </div>
                 <hr>
