@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-nkm=6aoslh$o_&*eg2f^rtw@5l^k%14dn)m0l5czfi+tdg^e1a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = '[*]'
+ALLOWED_HOSTS = ["anu6569.onrender.com",'127.0.0.1','localhost']
 
 
 # Application definition
@@ -58,6 +58,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # render.com middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'ecomprj.urls'
@@ -85,12 +88,12 @@ WSGI_APPLICATION = 'ecomprj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 
 # Password validation
@@ -133,6 +136,10 @@ STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 
+
+# renderstorage
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# ......
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -172,3 +179,6 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+KEY='rzp_test_LcYoGkJW1B1wMM'
+SECRET='9u4i7XvFk9Oh1QnTJGXBD43V'

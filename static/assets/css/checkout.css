@@ -69,9 +69,6 @@ input:focus::-webkit-input-placeholder
     background-color: #ffffff;
     padding: 2vh;   
 }
-.checking-out .left img{
-    width: 2rem;
-}
 .checking-out .left .col-4{
     padding-left: 0;
 }
@@ -88,28 +85,7 @@ input:focus::-webkit-input-placeholder
 .checking-out .lower{
     line-height: 2;
 }
-.checking-out .btn{
-    background-color: rgb(23, 4, 189);
-    border-color: rgb(23, 4, 189);
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin: 4vh 0 1.5vh 0;
-    padding: 1.5vh;
-    border-radius: 0;
-}
-.checking-out .btn:focus{
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none; 
-}
-.checking-out .btn:hover{
-    color: white;
-}
+
 .checking-out input[type=checkbox]{
     width: unset;
     margin-bottom: unset;
@@ -120,6 +96,3 @@ input:focus::-webkit-input-placeholder
     background-position-x: 95%;
     background-position-y: center;
 } 
-#cvv:hover{
-
-}

@@ -28,10 +28,10 @@
         </div>
         <hr>
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <div class="left border">
                     <div class="row">
-                        <span class="header">Payment</span>
+                        <span class="header" style="font-size: 3em;">Payment</span>
                         <div class="icons">
                             <img src="https://img.icons8.com/color/48/000000/visa.png"/>
                             <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png"/>
@@ -56,44 +56,48 @@
                     </form>
                 </div>                        
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="right border">
-                    <div class="header">Order Summary</div>
-                    <p>2 items</p>
+                    <div class="header" style="font-size: 3em;">Order Summary</div>
+                    <p style="text-align: left;color: #2a80fd;">2 items</p>
+                    
                     <div class="row item">
-                        <div class="col-4 align-self-center"><img class="img-fluid" src="https://i.imgur.com/79M6pU0.png"></div>
-                        <div class="col-8">
-                            <div class="row"><b>$ 26.99</b></div>
-                            <div class="row text-muted">Be Legandary Lipstick-Nude rose</div>
-                            <div class="row">Qty:1</div>
+                        {% for product_id, item in cart_data.items %}
+                        <div class="col-md-12">
+                            <div class="row" style="justify-content: left;align-items: center;">
+                                <div class="col-md-4 col-sm-12 align-self-center">
+                                    <img style="max-width: 7em;" class="img-fluid" src="{{ item.image }}">
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row" style="font-size: 1.8em;">&#x20b9;{{ item.price }}</div>
+                                    <div class="row text-muted" style="font-size: 1.4em;">{{ item.title }}</div>
+                                    <div class="row" style="font-size: 1.4em;">Qty:{{ item.qty }}</div>
+                                </div>
+                            </div>
+                        </div><hr>
+                        {% endfor %}
+                    </div>
+                    
+                    <form>
+                        <div class="row" style="padding: .5em;">
+                            <div class="col" style="padding-left:0;font-size: 1.7em;"> {{ request.session.cart_data_obj|length }} Items</div>
+                            <div class="col text-right" style="font-size: 1.7em;font-weight: 700;">&#x20b9; {{ cart_total_amount|floatformat }}</div>
+                        </div><hr>
+                        <div class="row" style="padding: .5em;">
+                            <div class="col" style="padding-left:0;font-size: 1.7em;"> Shipping</div>
+                            <div class="col text-right" style="font-size: 1.7em;font-weight: 700;">&#x20b9; 0 (Free)</div>
+                        </div><hr>
+                        <div class="row" style="padding: .5em;">
+                            <div class="col" style="padding-left:0;font-size: 1.7em;">TOTAL PRICE</div>
+                            <div class="col text-right" style="font-size: 1.7em;font-weight: 700;">&#x20b9; {{ cart_total_amount|floatformat }}</div>
                         </div>
-                    </div>
-                    <div class="row item">
-                        <div class="col-4 align-self-center"><img class="img-fluid" src="https://i.imgur.com/Ew8NzKr.jpg"></div>
-                        <div class="col-8">
-                            <div class="row"><b>$ 19.99</b></div>
-                            <div class="row text-muted">Be Legandary Lipstick-Sheer Navy Cream</div>
-                            <div class="row">Qty:1</div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row lower">
-                        <div class="col text-left">Subtotal</div>
-                        <div class="col text-right">$ 46.98</div>
-                    </div>
-                    <div class="row lower">
-                        <div class="col text-left">Delivery</div>
-                        <div class="col text-right">Free</div>
-                    </div>
-                    <div class="row lower">
-                        <div class="col text-left"><b>Total to pay</b></div>
-                        <div class="col text-right"><b>$ 46.98</b></div>
-                    </div>
-                    <div class="row lower">
-                        <div class="col text-left"><a href="#"><u>Add promo code</u></a></div>
-                    </div>
-                    <button class="btn">Place order</button>
-                    <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+                        <br>
+                        {% if cart_total_amount %}
+                        <button  class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;display: flex;align-items: center;justify-content: center;"><a style="text-decoration: none; color: #bd3673;font-size: 1.6em;">Place Order</a><span class="material-symbols-outlined" style="color: #bd3673;">shopping_cart_checkout</span></button>
+                        {% else %}
+                        <button id="rzp-button1" class="col-md-12 btn btn-outline-success" style="padding: .5em;font-size: 1.2em;pointer-events: none;display: flex;align-items: center;justify-content: center;"><a style="text-decoration: none; color: #bd3673;">Place Order</a><span class="material-symbols-outlined" style="color: #bd3673;">shopping_cart_checkout</span></button>
+                        {% endif %}
+                    </form>
                 </div>
             </div>
         </div>
@@ -102,4 +106,5 @@
  <div>
 </div>
 </div>
+
 {% endblock content %}
