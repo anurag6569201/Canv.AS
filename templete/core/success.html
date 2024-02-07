@@ -1,0 +1,106 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="invoice-page row">
+        <div class="col-md-12"><hr>
+            <h1>Dashboard</h1>
+        </div>
+        <div class="col-md-12">
+            <div class="row" style="justify-content: center;">
+                <div class="a4-paper">
+                    <div class="row">
+                        <div class="col-md-4" style="display: flex;justify-content: left;">
+                            <img src="../../static/assets/logo/admin.png.jpg" alt="">
+                        </div>
+                        <div class="col-md-8" style="text-align: right;">
+                            <h1>INVOICE</h1>
+                            <p>ID-NUMBER:4564898</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table">
+                                <style>
+                                    .table {
+                                        border-collapse: collapse;
+                                        width: 100%;
+                                    }
+                                
+                                    th, td {
+                                        border: 1px solid #ddd; 
+                                        padding: 8px;
+                                        text-align: center;
+                                        vertical-align: middle; 
+                                    }
+                                
+                                    .img-fluid {
+                                        object-fit: contain;
+                                        max-height: 50px;
+                                    }
+                                </style>
+                                <br><br>
+                                <thead>
+                                    <tr>
+                                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Product</th>
+                                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Price</th>
+                                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Quantity</th>
+                                        <th style="background-color: #f4f6f9; font-size: 1.6em;">Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for product_id, item in cart_data.items %}
+                                    <tr>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                                    <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}">
+                                                </div>
+                                                <div class="col">
+                                                    <a href="#" style="text-decoration: none;">
+                                                        <div style="font-size: 1.2em;" class="row text-muted">{{ item.title }}</div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="font-size: 1.2em;">&#x20b9; {{ item.price }}</td>
+                                        <td>
+                                            <div class="col d-flex align-items-center justify-content-center">
+                                                <span class="invoice-item-price">{{ item.qty }}</span>
+                                            </div>
+                                        </td>
+                                        <td style="font-size: 1.2em;">&#x20b9; {{ cart_total_amount }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    
+                                    <tr>
+                                        <td colspan="3" style="text-align: right;">Subtotal</td>
+                                        <td style="font-size: 1.2em;">&#x20b9; {{ cart_total_amount }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align: right;">Tax (0%)</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align: right;">Shipping (Free)</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align: right; font-weight: bold;">Grand Total</td>
+                                        <td style="font-size: 1.2em; font-weight: bold;">&#x20b9; {{ cart_total_amount }}</td>
+                                    </tr>
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

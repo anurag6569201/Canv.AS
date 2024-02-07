@@ -1,0 +1,13 @@
+.invoice-page{
+    margin-top: 60px;
+    text-align: center;
+}
+.a4-paper{
+    background-color: #f4f6f9;
+    width: 21cm;
+    height: 29.7cm;
+    padding: 2em;
+}
+.invoice-item-price{
+    font-size: 1.4em;
+}

@@ -237,8 +237,14 @@ def update_from_cart(request):
     
 
 def success(request):
+    cart_total_amount=0
+    if 'cart_data_obj' in request.session:
+        for product_id,item in request.session['cart_data_obj'].items():
+            cart_total_amount+=int(item['qty'])*float(item['price'])
+
     order_id=request.GET.get('order_id')
     cart=CartOrder.objects.get(razor_pay_order_id=order_id)
     cart.paid_track=True
     cart.save()
-    return HttpResponse("Payment success")
+
+    return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})

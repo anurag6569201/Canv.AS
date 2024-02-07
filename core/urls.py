@@ -30,5 +30,5 @@ urlpatterns=[
     path("cart/",views.cart_view,name="cart"),
     path("update-cart/",views.update_from_cart,name="update-cart"),
 
-    path("success/",views.success,name="success"),
+    path("checkout/success/",views.success,name="success"),
 ] 
