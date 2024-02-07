@@ -3,21 +3,22 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container-fluid" style="background-color: #f4f6f9;">
     <div class="invoice-page row">
-        <div class="col-md-12"><hr>
+        <div class="col-md-12" style="display: flex;align-items: center;justify-content: center;margin-top: 80px;color: #bd3673;gap: .5em;">
+            <span class="material-symbols-outlined">dashboard</span>
             <h1>Dashboard</h1>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12"><br>
             <div class="row" style="justify-content: center;">
                 <div class="a4-paper">
                     <div class="row">
                         <div class="col-md-4" style="display: flex;justify-content: left;">
-                            <img src="../../static/assets/logo/admin.png.jpg" alt="">
+                            <img src="../../static/assets/logo/mainlogo.png" alt="">
                         </div>
                         <div class="col-md-8" style="text-align: right;">
                             <h1>INVOICE</h1>
-                            <p>ID-NUMBER:4564898</p>
+                            <p>Date : {{ cart.order_date }}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -54,12 +55,12 @@
                                     {% for product_id, item in cart_data.items %}
                                     <tr>
                                         <td>
-                                            <div class="row">
-                                                <div class="col-2 d-flex align-items-center justify-content-center">
+                                            <div class="row" style="align-items: center;">
+                                                <div class="col-3 d-flex align-items-center justify-content-center">
                                                     <img class="img-fluid" src="{{ item.image }}" alt="{{ item.title }}">
                                                 </div>
                                                 <div class="col">
-                                                    <a href="#" style="text-decoration: none;">
+                                                    <a style="text-decoration: none;">
                                                         <div style="font-size: 1.2em;" class="row text-muted">{{ item.title }}</div>
                                                     </a>
                                                 </div>
@@ -76,19 +77,19 @@
                                     {% endfor %}
                                     
                                     <tr>
-                                        <td colspan="3" style="text-align: right;">Subtotal</td>
+                                        <td colspan="3" style="text-align: right;font-size: 1.2em;">Subtotal</td>
                                         <td style="font-size: 1.2em;">&#x20b9; {{ cart_total_amount }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="text-align: right;">Tax (0%)</td>
-                                        <td>0</td>
+                                        <td colspan="3" style="text-align: right;font-size: 1.2em;">Tax (0%)</td>
+                                        <td style="font-size: 1.2em;">0</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="text-align: right;">Shipping (Free)</td>
-                                        <td>0</td>
+                                        <td colspan="3" style="text-align: right;font-size: 1.2em;">Shipping (Free)</td>
+                                        <td style="font-size: 1.2em;">0</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" style="text-align: right; font-weight: bold;">Grand Total</td>
+                                        <td colspan="3" style="text-align: right; font-weight: bold;font-size: 1.2em;">Grand Total</td>
                                         <td style="font-size: 1.2em; font-weight: bold;">&#x20b9; {{ cart_total_amount }}</td>
                                     </tr>
                                 </tbody>
@@ -96,8 +97,29 @@
                             </table>
                         </div>
                     </div>
+                    <br><br>
+                    <div class="row">
+                        <div class="col-md-4" style="text-align: left;">
+                            <h1>Invoice Information</h1>
+                            <p style="font-size: 1.2em;">
+                                Issue By : {{ request.user|title }} <br>
+                            </p>
+                        </div>
+                        <div class="col-md-8" style="text-align: right;">
+                            <h1>Total Amount</h1>
+                            <p style="font-size: 1.2em;">&#x20b9; {{ cart_total_amount }}</p>
+                        </div>
+                    </div>
+                    <br><hr>
+                    <span style="font-size: 1.4em;">Hey <span style="color: #6e6e6e;">{{ request.user|title }}</span>, Thanks for Shopping at Canv.AS</span>
+                </div>
+                <div class="col-md-12 working-btn"><br>
+                    <button>Print</button>
+                    <button>Download</button>
                 </div>
             </div>
+            
+            <br><br>
         </div>
     </div>
 </div>

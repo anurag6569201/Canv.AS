@@ -243,8 +243,17 @@ def success(request):
             cart_total_amount+=int(item['qty'])*float(item['price'])
 
     order_id=request.GET.get('order_id')
-    cart=CartOrder.objects.get(razor_pay_order_id=order_id)
+    cart=CartOrder.objects.get(user=request.user)
+    cart.razor_pay_order_id=order_id
     cart.paid_track=True
     cart.save()
+    cart=CartOrder.objects.get(user=request.user)
+    return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'cart':cart})
 
-    return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
+
+def customer_dashboard(request):
+    orders=CartOrder.objects.filter(user=request.user)
+    context={
+        'orders':orders,
+    }
+    return render(request,'core/dashboard.html',context)

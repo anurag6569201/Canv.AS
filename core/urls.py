@@ -31,4 +31,7 @@ urlpatterns=[
     path("update-cart/",views.update_from_cart,name="update-cart"),
 
     path("checkout/success/",views.success,name="success"),
+
+
+    path("dashboard/",views.customer_dashboard,name="customer_dashboard"),
 ] 
