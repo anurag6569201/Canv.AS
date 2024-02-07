@@ -3,7 +3,6 @@
     padding: 20px;
     border-radius: 8px;
     width: 100%;
-    height: 100vh;
     font-size: 13px;
     display: flex;
     justify-content: space-evenly;
@@ -14,7 +13,6 @@
     width: 100%;
     display: block;
     max-width: 100%;
-    display: block;
     object-fit: cover;
 }
 
@@ -34,8 +32,8 @@
     background-color: #f4f4f4;
     border: 1px solid #ccc;
     border-radius: 4px 4px 0 0;
+    text-decoration: none;
 }
-
 .login-signup-tab:hover {
     background: linear-gradient(#d65189, #dd2e8e79);
 }
@@ -46,12 +44,13 @@
 }
 
 .login-signup-form-content {
-    display: none;
+    display: block;
     width: 40em;
 }
 
 .active-login-signup-content {
     display: block;
+    width: 40em;
 }
 
 .login-signup-label {
