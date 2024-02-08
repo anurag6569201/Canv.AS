@@ -2,7 +2,6 @@
 {% load static %}
 
 {% block content %}
-
 <div class="container-fluid" style="background-color: #f4f6f9;">
     <div class="invoice-page row">
         <div class="col-md-12" style="display: flex;align-items: center;justify-content: center;margin-top: 80px;color: #bd3673;gap: .5em;">
@@ -11,7 +10,7 @@
         </div>
         <div class="col-md-12"><br>
             <div class="row" style="justify-content: center;">
-                <div class="a4-paper">
+                <div class="a4-paper" id="container_content">
                     <div class="row">
                         <div class="col-md-4" style="display: flex;justify-content: left;">
                             <img src="../../static/assets/logo/mainlogo.png" alt="">
@@ -72,7 +71,7 @@
                                                 <span class="invoice-item-price">{{ item.qty }}</span>
                                             </div>
                                         </td>
-                                        <td style="font-size: 1.2em;">&#x20b9; {{ cart_total_amount }}</td>
+                                        <td style="font-size: 1.2em;">&#x20b9; {% widthratio item.price 1 item.qty %}</td>
                                     </tr>
                                     {% endfor %}
                                     
@@ -114,10 +113,36 @@
                     <span style="font-size: 1.4em;">Hey <span style="color: #6e6e6e;">{{ request.user|title }}</span>, Thanks for Shopping at Canv.AS</span>
                 </div>
                 <div class="col-md-12 working-btn"><br>
-                    <button>Print</button>
-                    <button>Download</button>
+                    <a type="button" id="rep" value="Print" class="btn_print"><button>Download</button></a>
+                    <a href="{% url 'core:product_list' %}"><button>Back To Shop</button></a>
+                    <a href="{% url 'core:customer_dashboard' %}"><button>Dashboard</button></a>
+                    
                 </div>
+                <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js" ></script>
+                <script type="text/javascript">
+                    
+                    $(document).on('click', '.btn_print', function(event) 
+                    {
+                        event.preventDefault();
+                        var element = document.getElementById('container_content'); 
+                        html2pdf().from(element).save();
+            
+                        html2pdf().set({filename: 'Invoice'+js.AutoCode()+'.pdf'}).from(element).save();
+                        var opt = 
+                        {
+                            margin:       0.5,
+                            filename:     'pageContent_'+js.AutoCode()+'.pdf',
+                            image:        { type: 'jpeg', quality: 0.98 },
+                            html2canvas:  { scale: 2 },
+                            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                        };
+                        html2pdf().set(opt).from(element).save();
+    
+                    });
+                </script>
             </div>
+            
             
             <br><br>
         </div>

@@ -34,4 +34,5 @@ urlpatterns=[
 
 
     path("dashboard/",views.customer_dashboard,name="customer_dashboard"),
+    path("dashboard/order/<int:id>",views.order_detail_view,name="order-detail"),
 ] 

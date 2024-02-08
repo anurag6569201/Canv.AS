@@ -201,9 +201,6 @@ def cart_view(request):
         
         client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
         payment=client.order.create({'amount':cart_total_amount*100,'currency':'INR','payment_capture':1})
-        cart_order, created = CartOrder.objects.get_or_create(user=request.user)
-        cart_order.price = cart_total_amount  # Update the total price if necessary
-        cart_order.save()
        
         return render(request,"core/cart.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'payment':payment})
     else:
@@ -226,9 +223,6 @@ def update_from_cart(request):
         
         client=razorpay.Client(auth=(settings.KEY,settings.SECRET))
         payment=client.order.create({'amount':cart_total_amount*100,'currency':'INR','payment_capture':1})
-        cart_order, created = CartOrder.objects.get_or_create(user=request.user)
-        cart_order.price = cart_total_amount  # Update the total price if necessary
-        cart_order.save()
        
         
         context=render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'payment':payment})
@@ -242,18 +236,42 @@ def success(request):
         for product_id,item in request.session['cart_data_obj'].items():
             cart_total_amount+=int(item['qty'])*float(item['price'])
 
-    order_id=request.GET.get('order_id')
-    cart=CartOrder.objects.get(user=request.user)
-    cart.razor_pay_order_id=order_id
-    cart.paid_track=True
-    cart.save()
-    cart=CartOrder.objects.get(user=request.user)
-    return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'cart':cart})
+        order = CartOrder.objects.create(
+            user=request.user,  # Assign the user to the order
+            price=cart_total_amount,
+        )
+        cart_total_amount=0
+        for product_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+
+            cart_order_item = CartOrderItems.objects.create(
+                order=order,
+                invoice_no="INVOICE_NO-" + str(order.id),
+                item=item['title'],
+                image=item['image'],
+                qty=item['qty'],
+                price=item['price'],
+                total=float(item['qty']) * float(item['price']),
+                user=request.user,  # Assign the user to the CartOrderItem
+            )
+    return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
 
 def customer_dashboard(request):
-    orders=CartOrder.objects.filter(user=request.user)
+    orders=CartOrder.objects.filter(user=request.user).order_by('-id')
     context={
         'orders':orders,
     }
     return render(request,'core/dashboard.html',context)
+
+def order_detail_view(request, id):
+    try:
+        order = CartOrder.objects.get(id=id, user=request.user)
+        products = CartOrderItems.objects.filter(order=order)
+        context = {
+            "order": order,
+            "products": products,
+        }
+        return render(request, 'core/order-detail.html', context)
+    except CartOrder.DoesNotExist:
+        return HttpResponse("Not found any order")
