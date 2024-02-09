@@ -1,5 +1,5 @@
 from django import forms
-from core.models import ProductReview
+from core.models import ProductReview,Address
 
 class ProductReviewForm(forms.ModelForm):
     review=forms.CharField(widget=forms.Textarea(attrs={'placeholder':"Write review"}))
@@ -7,3 +7,8 @@ class ProductReviewForm(forms.ModelForm):
     class Meta:
         model=ProductReview
         fields=['review','rating']
+
+class addressForm(forms.ModelForm):
+    class Meta:
+        model=Address
+        fields=['address','mobile']

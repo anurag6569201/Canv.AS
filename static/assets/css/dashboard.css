@@ -1,0 +1,20 @@
+.addressview button{
+    background-color: transparent;
+    color: #bd3673;
+    padding: .3em 2em;
+    border: 1px solid #bd3673;
+    border-radius: .3em;
+    font-size: 1.4em;
+    margin-right: 1em;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+.addressview button:hover{
+    background-color: #bd3673;
+    color: white;
+    border: 1px solid white;
+}
+.addressview :focus-visible {
+    outline: none;
+}

@@ -424,11 +424,14 @@
     .gridView .cell-label {
         opacity: 0.6;
     }
+    .addressview{
+        display: none;
+    }
 </style>
 <div class="app-container" style="margin-top: 110px;">
     <div class="sidebar">
         <ul class="sidebar-list">
-            <li class="sidebar-list-item">
+            <li class="sidebar-list-item" onclick="sort_home()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -439,7 +442,7 @@
                     <span>Home</span>
                 </a>
             </li>
-            <li class="sidebar-list-item active">
+            <li class="sidebar-list-item active" onclick="sort_orders()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -448,10 +451,10 @@
                         <line x1="3" y1="6" x2="21" y2="6" />
                         <path d="M16 10a4 4 0 0 1-8 0" />
                     </svg>
-                    <span>Products</span>
+                    <span>Orders</span>
                 </a>
             </li>
-            <li class="sidebar-list-item">
+            <li class="sidebar-list-item" onclick="sort_stats()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -462,7 +465,7 @@
                     <span>Statistics</span>
                 </a>
             </li>
-            <li class="sidebar-list-item">
+            <li class="sidebar-list-item" onclick="sort_address()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -471,10 +474,10 @@
                         <path
                             d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
                     </svg>
-                    <span>Inbox</span>
+                    <span>Address</span>
                 </a>
             </li>
-            <li class="sidebar-list-item">
+            <li class="sidebar-list-item" onclick="sort_notify()">
                 <a href="#">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -487,8 +490,9 @@
             </li>
         </ul>
     </div>
+
     <div class="app-content">
-        <div class="products-area-wrapper tableView">
+        <div class="products-area-wrapper tableView" data-category="app_orders">
             <div class="products-header">
                 <div class="product-cell image">
                     Order
@@ -561,6 +565,45 @@
             </div>
             {% endfor %}
         </div>
+
+        <div class="products-area-wrapper addressview" data-category="app_address">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Add Address</h1><br>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="col-md-12">
+                                <input name="address" class="col-md-5" style="font-size: 1.8em;padding:0 .3em;" placeholder="Address" type="text" value="{{address.address}}">
+                                <input name="mobile" class="col-md-5" style="font-size: 1.8em;padding:0 .3em;" placeholder="Phone" type="number" value="{{address.mobile}}">
+                            </div>
+                            <br>
+                            <button type="submit">
+                                <span>Save Address</span>
+                            </button>
+                        </form>
+                        <br><hr>
+                    </div>
+                    {% for a in address %}
+                    <div class="col-md-6">
+                        <h1>Address {{ forloop.counter }}</h1>
+                       
+                        <p style="font-size: 1.8em;margin-bottom: 0;">
+                            {{ a.address }} <br>
+                            {{ a.mobile }} <br>
+                            {{ a.status }}
+                        </p>
+                        <button style="margin-top: 0;">
+                            <span>Make Default</span>
+                            <span class="material-symbols-outlined">check_circle</span>
+                        </button><br>  
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 {% endblock content %}

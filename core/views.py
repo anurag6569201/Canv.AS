@@ -7,11 +7,13 @@ from django.shortcuts import get_object_or_404
 from taggit.models import Tag
 from django.db.models import Avg
 from core.forms import ProductReviewForm
+from core.forms import addressForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.template.loader import render_to_string
 import razorpay
 from django.conf import settings
+from django.contrib import messages
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -259,8 +261,23 @@ def success(request):
 
 def customer_dashboard(request):
     orders=CartOrder.objects.filter(user=request.user).order_by('-id')
+    address=Address.objects.filter(user=request.user)
+    address_form=addressForm()
+    if request.method=="POST":
+        addr=request.POST.get("address")
+        mobile=request.POST.get("mobile")
+        new_address=Address.objects.create(
+            user=request.user,
+            address=addr,
+            mobile=mobile,
+        )
+        messages.success(request,"address added successfully")
+        return redirect("core:customer_dashboard")
+
     context={
         'orders':orders,
+        'address':address,
+        'address_form':address_form,
     }
     return render(request,'core/dashboard.html',context)
 
