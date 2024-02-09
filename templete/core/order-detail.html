@@ -452,7 +452,7 @@
                 </a>
             </li>
             <li class="sidebar-list-item">
-                <a href="{% url 'userauths:sign-out' %}" onclick="sort_stats()">
+                <a href="#" onclick="sort_stats()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="feather feather-pie-chart">
@@ -533,6 +533,18 @@
             </div>
             {% endfor %}
         </div>
+
+        <div class="products-area-wrapper addressview" data-category="app_stats">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Are you sure want to log-out ?</h1><br>
+                        <a style="text-decoration: none;color: #bd3673;" href="{% url 'userauths:sign-out' %}"><button>log-out</button></a>
+                     </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
 </div>
 {% endblock content %}

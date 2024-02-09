@@ -292,3 +292,9 @@ def order_detail_view(request, id):
         return render(request, 'core/order-detail.html', context)
     except CartOrder.DoesNotExist:
         return HttpResponse("Not found any order")
+    
+def make_address_default(request):
+    id=request.GET['id']
+    Address.objects.update(status=False)
+    Address.objects.filter(id=id).update(status=True)
+    return JsonResponse({"boolean":True})

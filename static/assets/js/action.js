@@ -85,5 +85,24 @@ $(document).ready(function(){
             }
         })
     })
+
+    $(document).on('click',".make-default-address",function(){
+        let id=$(this).attr("data-address-id")
+        let this_val=$(this)
+
+        console.log(id)
+        console.log(this_val)
+
+        $.ajax({
+            url:"/make-default-address",
+            data:{
+                "id":id
+            },
+            dataType:"json",
+            success:function(res){
+                console.log("fdnwie")
+            }
+        })
+    })
 })
 
