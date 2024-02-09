@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address
+from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,profile,contactUs
 from core.models import FAQS
 # Register your models here.
 
@@ -32,6 +32,12 @@ class AddressAdmin(admin.ModelAdmin):
     list_editable=['address','status']
     list_display = ['user', 'address', 'status']
 
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['full_name', 'bio', 'phone']
+
+class contactUsmod(admin.ModelAdmin):
+    list_display = ['full_name', 'email', 'subject','message']
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Vendor, VendorAdmin)
@@ -41,3 +47,5 @@ admin.site.register(ProductReview, ProductReviewAdmin)
 admin.site.register(Wishlist, WishlistAdmin)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(FAQS)
+admin.site.register(profile,ProfileAdmin)
+admin.site.register(contactUs,contactUsmod)

@@ -1,11 +1,11 @@
 from django.shortcuts import render,HttpResponse
-from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,RATING
+from core.models import Category, Vendor, Product, ProductImages, CartOrder, CartOrderItems, ProductReview, Wishlist, Address,RATING,profile
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from core.models import FAQS
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
-from django.db.models import Avg
+from django.db.models import Avg,Count
 from core.forms import ProductReviewForm
 from core.forms import addressForm
 from django.http import JsonResponse
@@ -14,6 +14,13 @@ from django.template.loader import render_to_string
 import razorpay
 from django.conf import settings
 from django.contrib import messages
+
+import calendar
+from django.db.models.functions import ExtractMonth
+
+from userauths.models import User
+from django.db.models.signals import post_save
+from django.db.models.signals import post_save
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -127,6 +134,7 @@ def product_detail(request,pid):
     }
     return render(request,"core/product-detail.html",context)
 
+@login_required
 def tag_list(request, tag_slug=None):
     tag = None
     products=Product.objects.filter(product_status="publish").order_by('-id')
@@ -140,6 +148,7 @@ def tag_list(request, tag_slug=None):
     }
     return render(request, "core/tag.html", context)
 
+@login_required
 def ajax_add_review(request,pid):
     product=Product.objects.get(pid=pid)
     user=request.user
@@ -161,6 +170,7 @@ def ajax_add_review(request,pid):
 
     return redirect("core:product_detail", pid=product.pid)
 
+@login_required
 def search_view(request):
     query=request.GET.get("q")
     products=Product.objects.filter(tagsss__name__icontains=query).order_by("-date").distinct()
@@ -171,6 +181,7 @@ def search_view(request):
     }
     return render(request,"core/search.html",context)
 
+@login_required
 def add_to_cart(request):
     cart_product={}
     cart_product[str(request.GET['id'])]={
@@ -195,6 +206,7 @@ def add_to_cart(request):
     
     return JsonResponse({"data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj'])})
 
+@login_required
 def cart_view(request):
     cart_total_amount=0
     if 'cart_data_obj' in request.session:
@@ -208,7 +220,7 @@ def cart_view(request):
     else:
         return render(request,"core/cart.html",{"cart_data":'','totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
-
+@login_required
 def update_from_cart(request):
     product_id=str(request.GET['id'])
     product_qty=str(request.GET['qty'])
@@ -231,7 +243,7 @@ def update_from_cart(request):
 
         return JsonResponse({"data":context,'totalcartitems':len(request.session['cart_data_obj'])})
     
-
+@login_required
 def success(request):
     cart_total_amount=0
     if 'cart_data_obj' in request.session:
@@ -258,11 +270,21 @@ def success(request):
             )
     return render(request,"core/success.html",{"cart_data":request.session['cart_data_obj'],'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
-
+@login_required
 def customer_dashboard(request):
-    orders=CartOrder.objects.filter(user=request.user).order_by('-id')
+    orders_list=CartOrder.objects.filter(user=request.user).order_by('-id')
     address=Address.objects.filter(user=request.user)
     address_form=addressForm()
+
+    orders=CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month","count")
+    month=[]
+    total_order=[]
+
+    for o in orders:
+        month.append(calendar.month_name[o["month"]])
+        total_order.append(o["count"])
+
+    prof=profile.objects.get(user=request.user)
     if request.method=="POST":
         addr=request.POST.get("address")
         mobile=request.POST.get("mobile")
@@ -273,14 +295,19 @@ def customer_dashboard(request):
         )
         messages.success(request,"address added successfully")
         return redirect("core:customer_dashboard")
-
+    
     context={
-        'orders':orders,
+        'profile':prof,
+        'orders':orders_list,
         'address':address,
         'address_form':address_form,
+        'ord':orders,
+        'month':month,
+        'total_order':total_order,
     }
     return render(request,'core/dashboard.html',context)
 
+@login_required
 def order_detail_view(request, id):
     try:
         order = CartOrder.objects.get(id=id, user=request.user)
@@ -292,9 +319,40 @@ def order_detail_view(request, id):
         return render(request, 'core/order-detail.html', context)
     except CartOrder.DoesNotExist:
         return HttpResponse("Not found any order")
-    
+
+@login_required   
 def make_address_default(request):
     id=request.GET['id']
     Address.objects.update(status=False)
     Address.objects.filter(id=id).update(status=True)
     return JsonResponse({"boolean":True})
+
+from .forms import profileForm
+
+@login_required
+def dash(request):
+    proff = profile.objects.get(user=request.user)
+    prof=profile.objects.get(user=request.user)
+    if request.method == 'POST':
+        form = profileForm(request.POST, request.FILES, instance=proff)
+        if form.is_valid():
+            form.save()
+            return redirect("core:customer_dashboard")
+    else:
+        form = profileForm(instance=proff)
+    context = {
+        'profile':prof,
+        'dash_form': form,
+    }
+    return render(request, 'core/dashboardedit.html', context)
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        profile.objects.create(user=instance)
+
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+post_save.connect(create_user_profile, sender=User)
+post_save.connect(save_user_profile,sender=User)

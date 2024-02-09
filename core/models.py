@@ -192,3 +192,38 @@ class FAQS(models.Model):
 
     class Meta:
         verbose_name_plural = "Faqs"
+
+
+class profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    image=models.ImageField(upload_to="image",default="https://bootdey.com/img/Content/avatar/avatar7.png")
+    full_name=models.CharField(max_length=200,null=True,blank=True,default="User 6569")
+    bio=models.CharField(max_length=200,null=True,blank=True,default="Web Developer")
+    phone=models.CharField(max_length=200,default="6569201000")
+    email=models.CharField(max_length=200,default="user6569@gmail.com")
+
+    website=models.CharField(max_length=100,default="www.google.com")
+    github=models.CharField(max_length=100,default="https://github.com/user")
+    twitter=models.CharField(max_length=100,default="@user6569")
+    instagram=models.CharField(max_length=100,default="@user6569")
+    facebook=models.CharField(max_length=100,default="@user6569")
+
+    verified=models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.full_name
+    
+
+class contactUs(models.Model):
+    full_name=models.CharField(max_length=200,null=True,blank=True)
+    phone=models.CharField(max_length=200)
+    email=models.CharField(max_length=200)
+    subject=models.CharField(max_length=200)
+    message=models.TextField()
+
+    class Meta:
+        verbose_name="Contact Us"
+        verbose_name_plural="Contact Us"
+
+    def __str__(self):
+        return self.full_name
