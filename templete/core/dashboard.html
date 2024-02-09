@@ -593,10 +593,16 @@
                             {{ a.mobile }} <br>
                             {{ a.status }}
                         </p>
+                        {% if a.status %}
+                        <button style="margin-top: 0;background-color: #e2b2c8;">
+                            <span>Default</span>
+                        </button>
+                        {% else %}
                         <button style="margin-top: 0;">
                             <span>Make Default</span>
-                            <span class="material-symbols-outlined">check_circle</span>
-                        </button><br>  
+                        </button>
+                        {% endif %}
+                        <br>
                     </div>
                     {% endfor %}
                 </div>
