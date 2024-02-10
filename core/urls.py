@@ -39,4 +39,7 @@ urlpatterns=[
 
     # address default
     path("make-default-address",views.make_address_default,name="make-default-address"),
+
+    # contact
+    path("contact/", views.contact, name="contactUs"),
 ] 

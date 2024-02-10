@@ -116,11 +116,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span
-                                            class="material-symbols-outlined">person_raised_hand</span>FAQS</a>
+                                    <a class="nav-link" href="{% url 'core:contactUs' %}"><span
+                                            class="material-symbols-outlined">person_raised_hand</span>Contact</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#"><span
+                                    <a class="nav-link" href="{% url 'core:customer_dashboard' %}"><span
                                             class="material-symbols-outlined">person_edit</span>Account</a>
                                 </li>
                             </ul>
@@ -152,7 +152,7 @@
                                             class="material-symbols-outlined">favorite</span>Artist</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="#"><span
+                                    <a class="nav-link disabled" href="{% url 'core:contactUs' %}"><span
                                             class="material-symbols-outlined">person_raised_hand</span>FAQS</a>
                                 </li>
                                 <li class="nav-item">
@@ -217,32 +217,22 @@
                 <div class="foot_info2">
                     <h1>NAVIGATE</h1>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{% url 'core:index' %}">Home</a></li>
+                        <li><a href="{% url 'core:product_list' %}">Shop</a></li>
+                        <li><a href="{% url 'core:product_list' %}">About Us</a></li>
+                        <li><a href="{% url 'core:contactUs' %}">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="foot_info3">
                     <h1>CATEGORY</h1>
                     <ul>
-                        <li><a href="#">Landscape</a></li>
-                        <li><a href="#">Abstract</a></li>
-                        <li><a href="#">Portraits</a></li>
-                        <li><a href="#">Modern Art</a></li>
+                        {% for c in globalcategory %}
+                        <li><a href="{% url 'core:product_list_category' c.cid %}">{{ c.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
-                <div class="foot_info4">
-                    <h1>POPULAR BRANDS</h1>
-                    <ul>
-                        <li><a href="#">Brand 1</a></li>
-                        <li><a href="#">Brand 2</a></li>
-                        <li><a href="#">Brand 3</a></li>
-                        <li><a href="#">Brand 4</a></li>
-                    </ul>
-                </div>
             </div>
 
         </div>

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from taggit.models import Tag
 from django.db.models import Avg,Count
-from core.forms import ProductReviewForm
+from core.forms import ProductReviewForm,ContactForm
 from core.forms import addressForm
 from django.http import JsonResponse
 from django.shortcuts import redirect
@@ -21,6 +21,9 @@ from django.db.models.functions import ExtractMonth
 from userauths.models import User
 from django.db.models.signals import post_save
 from django.db.models.signals import post_save
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 
 @login_required(login_url='/user/sign-in')
 def index(request):
@@ -346,6 +349,34 @@ def dash(request):
     }
     return render(request, 'core/dashboardedit.html', context)
 
+def contact(request):
+    form = ContactForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            subject = form.cleaned_data['subject']
+            phone = form.cleaned_data['phone']
+
+            html = render_to_string('core/email.html', {
+                'full_name': full_name,
+                'email': email,
+                'message': message,
+                'phone': phone,
+                'subject': subject,
+            })
+
+            send_mail(subject, message, email, ['anurag6569201@gmail.com'], html_message=html)
+            messages.success(request, "Message sent successfully!")
+            return redirect("core:index")
+    else:
+        form = ContactForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, "core/contact.html", context)
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
