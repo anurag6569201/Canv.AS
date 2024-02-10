@@ -1,0 +1,55 @@
+@media (max-width:500px){
+    .left-container {
+        left: -100%;
+    }
+    .right-container {
+        margin-left: 0em;
+    }
+    .carousel-inner {
+        padding: 1em!important;
+    }
+    .first-line-text{
+        margin-top: 1em;
+    }
+    .foot_info3,
+    .foot_info2{
+        padding: 0;
+        width: 100%;
+        text-align: center;
+    }
+    .ft2{
+        padding: 0 2em;
+    }
+    .app-container{
+        display: block;
+    }
+    .sidebar{
+        flex-basis: 0;
+        max-width: 100%;
+    }
+    .app-content{
+        padding: 0;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .tableView .product-cell {
+        padding: 0;
+        font-size: 10px;
+        text-align: center;
+        padding: .3em;
+    }
+    .tableView .sort-button {
+        display: none;
+    }
+    .hero1 {
+        padding: 20px 20px;
+    }
+    .contaning_forms{
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .login-signup-form-content {
+        min-width: 100%;
+    }
+    
+}

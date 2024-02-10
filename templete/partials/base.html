@@ -18,6 +18,7 @@
 
 
     <link rel="stylesheet" href="{% static 'assets/css/over-ride.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
 </head>
 
 <body>
@@ -153,7 +154,7 @@
 
     {% endblock content %}
 
-    <footer>
+    <footer style="margin-top: 2em;z-index:1000;position: sticky;">
         <div class="foot1">
 
             <div class="ft1">
@@ -172,32 +173,22 @@
                 <div class="foot_info2">
                     <h1>NAVIGATE</h1>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{% url 'core:index' %}">Home</a></li>
+                        <li><a href="{% url 'core:product_list' %}">Shop</a></li>
+                        <li><a href="{% url 'core:product_list' %}">About Us</a></li>
+                        <li><a href="{% url 'core:contactUs' %}">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="foot_info3">
                     <h1>CATEGORY</h1>
                     <ul>
-                        <li><a href="#">Landscape</a></li>
-                        <li><a href="#">Abstract</a></li>
-                        <li><a href="#">Portraits</a></li>
-                        <li><a href="#">Modern Art</a></li>
+                        {% for c in globalcategory %}
+                        <li><a href="{% url 'core:product_list_category' c.cid %}">{{ c.title }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
 
-                <div class="foot_info4">
-                    <h1>POPULAR BRANDS</h1>
-                    <ul>
-                        <li><a href="#">Brand 1</a></li>
-                        <li><a href="#">Brand 2</a></li>
-                        <li><a href="#">Brand 3</a></li>
-                        <li><a href="#">Brand 4</a></li>
-                    </ul>
-                </div>
             </div>
 
         </div>
