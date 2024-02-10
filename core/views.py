@@ -104,7 +104,7 @@ def vendor_detail(request,vid):
 def product_detail(request,pid):
     product=Product.objects.get(pid=pid)
     related_product=Product.objects.filter(category=product.category).exclude(pid=pid)[:4]
-    Addres=Address.objects.get(user=request.user)
+    Addres=Address.objects.filter(user=request.user, status=True)
     product_images = ProductImages.objects.filter(product=product)
     vendor = product.vendor
 
