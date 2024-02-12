@@ -19,9 +19,6 @@
 @media(max-width:768px){
     .card-body{
         padding: 0 1rem 1rem 1rem;
-        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
     }  
     .card-top{
         padding: 0.7rem 1rem;
