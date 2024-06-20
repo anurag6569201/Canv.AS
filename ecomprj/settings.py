@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-nkm=6aoslh$o_&*eg2f^rtw@5l^k%14dn)m0l5czfi+tdg^e1a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://canv-as.azurewebsites.net','https://127.0.0.1']
 
 EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_HOST_USER = 'anurag6569201@gmail.com'
